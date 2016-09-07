@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\GLEWv2.0.0">
+      <UniqueIdentifier>{9a97892b-2440-42cf-8c67-8f0aaf2879f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\GLEWv2.0.0\lib">
+      <UniqueIdentifier>{41fed7ee-548d-4322-9e72-cbd0e74d36b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\GLEWv2.0.0\include">
+      <UniqueIdentifier>{85edf69f-8877-486d-b002-08f37787f036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\SDL">
+      <UniqueIdentifier>{23953048-937b-4105-bea3-140383d65abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\SDL\include">
+      <UniqueIdentifier>{b25811e6-5ae1-427b-86da-5a8cd5980eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\SDL\lib">
+      <UniqueIdentifier>{1ddce234-0513-45a9-a0c2-1ddd6ab9927b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib">
+      <Filter>Resource Files\GLEWv2.0.0\lib</Filter>
+    </Library>
+    <Library Include="SDL\lib\win32\SDL2.lib">
+      <Filter>Resource Files\SDL\lib</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\eglew.h">
+      <Filter>Resource Files\GLEWv2.0.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glew.h">
+      <Filter>Resource Files\GLEWv2.0.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glxew.h">
+      <Filter>Resource Files\GLEWv2.0.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\wglew.h">
+      <Filter>Resource Files\GLEWv2.0.0\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\begin_code.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\close_code.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_assert.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_atomic.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_audio.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_bits.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_blendmode.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_clipboard.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_android.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_iphoneos.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_macosx.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_minimal.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_pandora.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_psp.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_windows.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_winrt.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_config_wiz.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_copying.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_cpuinfo.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_egl.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_endian.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_error.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_events.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_filesystem.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_gamecontroller.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_gesture.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_haptic.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_hints.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_joystick.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_keyboard.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_keycode.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_loadso.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_log.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_main.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_messagebox.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_mouse.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_mutex.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_name.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengl.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengl_glext.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles2.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles2_gl2.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles2_gl2ext.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles2_gl2platform.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_opengles2_khrplatform.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_pixels.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_platform.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_power.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_quit.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_rect.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_render.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_revision.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_rwops.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_scancode.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_shape.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_stdinc.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_surface.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_system.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_syswm.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_assert.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_common.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_compare.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_crc32.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_font.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_fuzzer.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_harness.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_images.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_log.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_md5.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_test_random.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_thread.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_timer.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_touch.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_types.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_version.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_video.h">
+      <Filter>Resource Files\SDL\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDL\lib\win32\SDL2.dll">
+      <Filter>Resource Files\SDL\lib</Filter>
+    </None>
+  </ItemGroup>
+</Project>
