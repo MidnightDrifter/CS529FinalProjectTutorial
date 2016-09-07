@@ -298,5 +298,6 @@
     <None Include="SDL\lib\win32\SDL2.dll">
       <Filter>Resource Files\SDL\lib</Filter>
     </None>
+    <None Include="SDL2.dll" />
   </ItemGroup>
 </Project>
