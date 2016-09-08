@@ -7,8 +7,8 @@ const int SCREEN_HEIGHT = 800;
 const int SCREEN_WIDTH = 1200;
 const int OPEN_GL_VERSION = 2;  // OpenGL version 3.x
 const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
-
-
+//Woo
+int test;
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 int main(int argc, char* argv[])
