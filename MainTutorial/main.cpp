@@ -2,7 +2,8 @@
 #include <SDL.h>
 #include <glew.h>
 #include <stdio.h>
-
+#define GLEW_STATIC
+#pragma comment (lib, "glew32s.lib")
 const int SCREEN_HEIGHT = 800;
 const int SCREEN_WIDTH = 1200;
 const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
@@ -60,7 +61,7 @@ int main(int argc, char* argv[])
 			SDL_GL_SwapWindow(window);
 
 			//Fill window with color--in this case, black
-
+			int i = 0;
 
 			//GAME LOOP HERE
 
