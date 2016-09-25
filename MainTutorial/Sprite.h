@@ -1,8 +1,7 @@
 #pragma once
 #include <glew.h>
 #include <SDL.h>
-#define GLEW_STATIC
-#pragma comment (lib, "glew32s.lib")
+#pragma comment (lib, "glew32.lib")
 class Sprite
 {
 public:
