@@ -110,12 +110,12 @@ public:
 
 		// Bind the location of our attributes
 		BindAttributeLocation(0, "in_Position");
-		BindAttributeLocation(1, "in_Color");
+	//	BindAttributeLocation(1, "in_Color");
 
-		if (!LoadVertexShader("tutorial2.vert"))
+		if (!LoadVertexShader("tutorialVertexShader.vert"))
 			return false;
 
-		if (!LoadFragmentShader("tutorial2.frag"))
+		if (!LoadFragmentShader("tutorialFragmentShader.frag"))
 			return false;
 
 		// All shaders has been create, now we must put them together into one large object

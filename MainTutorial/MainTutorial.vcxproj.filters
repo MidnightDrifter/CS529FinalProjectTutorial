@@ -39,6 +39,9 @@
     <Library Include="SDL\lib\win32\SDL2.lib">
       <Filter>Resource Files\SDL\lib</Filter>
     </Library>
+    <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32.lib">
+      <Filter>Resource Files\GLEWv2.0.0\lib</Filter>
+    </Library>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\eglew.h">
