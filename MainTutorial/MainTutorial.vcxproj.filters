@@ -293,18 +293,25 @@
     <ClInclude Include="SDL\include\SDL_video.h">
       <Filter>Resource Files\SDL\include</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
       <Filter>Resource Files\SDL\lib</Filter>
     </None>
     <None Include="SDL2.dll" />
+    <None Include="glew32.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tesyt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
