@@ -62,6 +62,9 @@ int main(int argc, char* argv[])
 			//Fill window with color--in this case, black
 
 
+
+
+
 			//GAME LOOP HERE
 
 			//Destroy context and window
