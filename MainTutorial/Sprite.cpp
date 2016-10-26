@@ -11,7 +11,7 @@ bool Sprite::getIsSquare() const
 	return isSquare;
 }
 
-void Sprite::genSquareSprite()
+void Sprite::genSquareSprite(Shader s)
 {
 	isSquare = true;
 	GLuint bufferID;
@@ -28,9 +28,17 @@ void Sprite::genSquareSprite()
 	//array index, number of points in our float arrays (3 for x,y,z), data stored inside array,
 	//whether data should be normalized, interval between vertex attributes (unused), starting point of data to use (unused)
 	glEnableVertexAttribArray(arrayBufferID);
+
+	if (!s.Init())
+		exit(-1);
+
+	s.UseProgram();
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
 
-void Sprite::genTriangleSprite()
+void Sprite::genTriangleSprite(Shader s)
 {
 	isSquare = false;
 	GLuint bufferID[1];
@@ -50,6 +58,13 @@ void Sprite::genTriangleSprite()
 
 
 	//SHADER STUFF & CALL GOES HERE
+
+	if (!s.Init())
+		exit(-1);
+
+	s.UseProgram();
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

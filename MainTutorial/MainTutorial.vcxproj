@@ -158,10 +158,13 @@
     <Library Include="SDL\lib\win32\SDL2.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FramerateController.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\eglew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glxew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\wglew.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
     <ClInclude Include="SDL\include\close_code.h" />
     <ClInclude Include="SDL\include\SDL.h" />
@@ -242,17 +245,28 @@
     <ClInclude Include="SDL\include\SDL_types.h" />
     <ClInclude Include="SDL\include\SDL_version.h" />
     <ClInclude Include="SDL\include\SDL_video.h" />
+    <ClInclude Include="shader.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
     <None Include="SDL2.dll" />
     <None Include="SDL\lib\win32\SDL2.dll" />
+    <None Include="tutorialFragmentShader.frag" />
+    <None Include="tutorialVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FramerateController.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="tesyt.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\darkpursuit.bmp" />
+    <Image Include="Resources\dark_pursuit_small_down.bmp" />
+    <Image Include="Resources\dark_pursuit_small_left.bmp" />
+    <Image Include="Resources\dark_pursuit_small_right.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #pragma once
 #include <glew.h>
 #include <SDL.h>
+#include "shader.h"
 #pragma comment (lib, "glew32.lib")
 class Sprite
 {
@@ -27,8 +28,8 @@ public:
 
 	GLuint getArrayBufferID() const;
 	bool getIsSquare() const; 
-	void genSquareSprite();  //Add in filename / filepath thing?
-	void genTriangleSprite();
+	void genSquareSprite(Shader s);  //Add in filename / filepath thing?
+	void genTriangleSprite(Shader s);
 	void draw(SDL_Window* win);
 
 

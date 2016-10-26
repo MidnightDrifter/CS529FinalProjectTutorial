@@ -31,6 +31,9 @@
     <Filter Include="Resource Files\SDL\lib">
       <UniqueIdentifier>{1ddce234-0513-45a9-a0c2-1ddd6ab9927b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{09fee9e1-aac3-413c-9deb-006b10923b7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib">
@@ -299,6 +302,18 @@
     <ClInclude Include="Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FramerateController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -306,16 +321,42 @@
     </None>
     <None Include="SDL2.dll" />
     <None Include="glew32.dll" />
+    <None Include="tutorialFragmentShader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="tutorialVertexShader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tesyt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FramerateController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\dark_pursuit_small_down.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\dark_pursuit_small_left.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\dark_pursuit_small_right.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\darkpursuit.bmp">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>
