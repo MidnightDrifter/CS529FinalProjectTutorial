@@ -1,12 +1,13 @@
 #pragma once
 #include <vector>
-class Component;
-
+#include "Component.h"
 class GameObject
 {
 public:
 	GameObject();
 	~GameObject();
+
+	void Update();
 
 private:
 	std::vector<Component*> components;
