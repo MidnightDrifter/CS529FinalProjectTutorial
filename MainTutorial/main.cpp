@@ -17,8 +17,6 @@
 #include "Transform.h"
 #include "SpriteBasic.h"
 #include "Controller.h"
-#include <glfw3.h>
-
 
 #pragma comment (lib, "glew32.lib")
 #pragma comment (lib, "glfw3.lib")
@@ -31,17 +29,13 @@ const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
 //Woo
 int test;
 //Shader shader;
-//SDL_Window* window;
-//SDL_Surface* surface;
-//SDL_Surface* winSurface;
-//SDL_GLContext context;
-
-GLFWwindow* window;
-
+SDL_Window* window;
+SDL_Surface* surface;
+SDL_Surface* winSurface;
+SDL_GLContext context;
 InputManager InputMgr = InputManager();
 FramerateController framerateController = FramerateController(5);
 ResourceManager ResourceMgr = ResourceManager();
-
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -161,49 +155,30 @@ int main(int argc, char* argv[])
 	//ppImage[2] = SDL_LoadBMP("Resources\\dark_pursuit_small_left.bmp");
 	//ppImage[3] = SDL_LoadBMP("Resources\\dark_pursuit_small_right.bmp");
 
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
-
-	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Gamez", nullptr, nullptr);
-	if (window == nullptr)
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return -1;
 	}
-
 
 	else
 	{
 		//return 0;
 		//printf
-		
-		//window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		//	SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 		// Check that everything worked out okay
-
-
-
-		glfwMakeContextCurrent(window);
-
-		glewExperimental = GL_TRUE;
-		if (glewInit() != GLEW_OK)
+		if (!window)
 		{
-			std::cout << "Failed to initialize GLEW" << std::endl;
-			return -1;
+			std::cout << "Unable to create window\n";
+			//CheckSDLError(__LINE__);
+			return false;
 		}
-		glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-		//glfwGetFramebufferSize()
-
-		//winSurface = SDL_GetWindowSurface(window);
-		//SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
-		//SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
-		//SDL_UpdateWindowSurface(window);
+		winSurface = SDL_GetWindowSurface(window);
+		SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+		SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
+		SDL_UpdateWindowSurface(window);
 		//Create window
 		//window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 
@@ -221,15 +196,15 @@ int main(int argc, char* argv[])
 			//{
 			//	exit(-1);
 			//}
-		//	glfwInit();
+		//	glewInit();
 			//Experimental and glewInit come AFTER the context is made
 			//glewExperimental = true;   //Uncomment to use later OpenGL stuff
 
-		//	glfwMakeContextCurrent(window);
 
 
-			glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+
+		//	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		//	glClear(GL_COLOR_BUFFER_BIT);
 		//	SDL_GL_SwapWindow(window);
 
 		//	Sprite s;
@@ -263,7 +238,7 @@ int main(int argc, char* argv[])
 
 				if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 				{
-					//currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
 					//SDL_BlitSurface(ppImage[0], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
@@ -271,21 +246,21 @@ int main(int argc, char* argv[])
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 				{
 
-					//currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
 					//SDL_BlitSurface(ppImage[1], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
 
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 				{
-					//currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
 					//SDL_BlitSurface(ppImage[2], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
 
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 				{
-					//currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
 					//SDL_BlitSurface(ppImage[3], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
@@ -304,8 +279,8 @@ int main(int argc, char* argv[])
 				bob = bob;
 				*/
 
-				//SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
-				//SDL_UpdateWindowSurface(window);
+				SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
+				SDL_UpdateWindowSurface(window);
 				InputMgr.Update();
 				framerateController.FrameEnd();
 			}	//GAME LOOP HERE
@@ -318,12 +293,12 @@ int main(int argc, char* argv[])
 		//	{
 			//	SDL_FreeSurface(ppImage[i]);
 		//	}
-		//	SDL_FreeSurface(winSurface);
+			SDL_FreeSurface(winSurface);
 		//	SDL_GL_DeleteContext(context);
 
 			// Destroy our window
-		//	SDL_DestroyWindow(window);
-			glfwTerminate();
+			SDL_DestroyWindow(window);
+
 			// Shutdown SDL 2
 			SDL_Quit();
 		}
