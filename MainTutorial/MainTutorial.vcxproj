@@ -171,6 +171,7 @@
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\wglew.h" />
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3.h" />
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h" />
+    <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
@@ -256,6 +257,7 @@
     <ClInclude Include="shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBasic.h" />
+    <ClInclude Include="SpriteComplex.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
@@ -272,11 +274,13 @@
     <ClCompile Include="FramerateController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBasic.cpp" />
+    <ClCompile Include="SpriteComplex.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
