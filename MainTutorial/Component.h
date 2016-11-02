@@ -1,13 +1,15 @@
 #pragma once
+#include <stdio.h>
+class GameObject;
 
-enum COMPONENT_TYPE
+enum class COMPONENT_TYPE
 { 
 	CONTROLLER,
 	TRANSFORM,
 	SPRITE,
-	PHYSICS,
+	PHYSICS
 	
-	NUM_COMPONENTS 
+
 
 };
 
@@ -15,13 +17,17 @@ enum COMPONENT_TYPE
 class Component
 {
 public:
-	Component();
+	Component(COMPONENT_TYPE c);
 	virtual ~Component();
-	virtual void Update();
-	virtual void Serialize();
+	virtual void Update() =0;
+	virtual void Serialize(FILE** fpp)=0;
+	void setOwner(GameObject* o);
+	COMPONENT_TYPE getType() const { return type; }
 
 
-private:
+
+protected:
 		COMPONENT_TYPE type;
+		GameObject* owner;
 };
 

@@ -88,14 +88,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\SDL\include;$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\glfw-3.2.1.bin.WIN32\include\GLFW;$(ProjectDir)\SDL\include;$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\include\GL;$(ProjectDir)\%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32;$(ProjectDir)\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32;$(ProjectDir)\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
@@ -155,16 +155,22 @@
   <ItemGroup>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32.lib" />
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib" />
+    <Library Include="glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.lib" />
+    <Library Include="glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3dll.lib" />
     <Library Include="SDL\lib\win32\SDL2.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="FramerateController.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\eglew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\glxew.h" />
     <ClInclude Include="glew-2.0.0-win32\glew-2.0.0\include\GL\wglew.h" />
+    <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3.h" />
+    <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
@@ -249,9 +255,12 @@
     <ClInclude Include="SDL\include\SDL_video.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteBasic.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
+    <None Include="glfw3.dll" />
     <None Include="SDL2.dll" />
     <None Include="SDL\lib\win32\SDL2.dll" />
     <None Include="tutorialFragmentShader.frag" />
@@ -259,12 +268,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FramerateController.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteBasic.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\darkpursuit.bmp" />

@@ -13,7 +13,13 @@
 #include "shader.h"
 #include <Windows.h>
 #include "ResourceManager.h"
+#include "GameObject.h"
+#include "Transform.h"
+#include "SpriteBasic.h"
+#include "Controller.h"
+
 #pragma comment (lib, "glew32.lib")
+#pragma comment (lib, "glfw3.lib")
 # define GL3_PROTOTYPES 1
 const int SCREEN_HEIGHT = 800;
 const int SCREEN_WIDTH = 1200;
@@ -29,7 +35,7 @@ SDL_Surface* winSurface;
 SDL_GLContext context;
 InputManager InputMgr = InputManager();
 FramerateController framerateController = FramerateController(5);
-ResourceManager resourceMgr = ResourceManager();
+ResourceManager ResourceMgr = ResourceManager();
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -80,7 +86,46 @@ window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_C
 */
 
 
+GameObject* LoadObject(const char *pFilename)
+{
+	GameObject* obj = NULL;
+	FILE* fp;
+	fopen_s(&fp, pFilename, "r");
 
+	std::string name("");
+		while (!feof(fp))
+		{
+			fscanf_s(fp, "%s\n", &name);
+			if (0==name.compare("Transform"))
+			{
+				Transform* t = new Transform();
+				t->Serialize(&fp);
+				obj->addComponent(t);
+			}
+
+			else if (0==name.compare("Sprite"))
+			{
+				SpriteBasic* t = new SpriteBasic();
+				t->Serialize(&fp);
+				obj->addComponent(t);
+			}
+
+			else if (0 == name.compare("Controller"))
+			{
+				Controller* t = new Controller();
+				t->Serialize(&fp);
+				obj->addComponent(t);
+
+			}
+/*  AI Component thing
+			else if (0 == name.compare(""))
+			{
+
+			}
+*/
+		}
+		return obj;
+}
 
 
 
@@ -97,10 +142,10 @@ int main(int argc, char* argv[])
 	}
 
 
-	resourceMgr.loadSurface("Resources\\darkpursuit.bmp");
-	resourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
-	resourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
-	resourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
+	ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
 
 	//SDL_Surface* ppImage[4] = { NULL, NULL, NULL, NULL };
 
@@ -131,7 +176,7 @@ int main(int argc, char* argv[])
 			return false;
 		}
 		winSurface = SDL_GetWindowSurface(window);
-		SDL_Surface * currentSurface = resourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+		SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
 		SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
 		SDL_UpdateWindowSurface(window);
 		//Create window
@@ -193,7 +238,7 @@ int main(int argc, char* argv[])
 
 				if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 				{
-					currentSurface = resourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
 					//SDL_BlitSurface(ppImage[0], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
@@ -201,21 +246,21 @@ int main(int argc, char* argv[])
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 				{
 
-					currentSurface = resourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
 					//SDL_BlitSurface(ppImage[1], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
 
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 				{
-					currentSurface = resourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
 					//SDL_BlitSurface(ppImage[2], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}
 
 				else if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 				{
-					currentSurface = resourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
+					currentSurface = ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
 					//SDL_BlitSurface(ppImage[3], NULL, winSurface, NULL);
 					//SDL_UpdateWindowSurface(window);
 				}

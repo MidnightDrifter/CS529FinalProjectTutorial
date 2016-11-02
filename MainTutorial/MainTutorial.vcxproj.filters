@@ -40,6 +40,15 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{3afbb525-0ea0-4b35-8812-d98ad455908b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\GLFW">
+      <UniqueIdentifier>{23ea6a7a-c36d-4d5c-8a0a-02ed4dfbc9f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\GLFW\include">
+      <UniqueIdentifier>{74bb3927-af88-4250-87f0-5e2a43f497e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\GLFW\lib">
+      <UniqueIdentifier>{aa759e52-e5e4-464d-8a2d-51e2d8dbe459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib">
@@ -50,6 +59,12 @@
     </Library>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32.lib">
       <Filter>Resource Files\GLEWv2.0.0\lib</Filter>
+    </Library>
+    <Library Include="glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3.lib">
+      <Filter>Resource Files\GLFW\lib</Filter>
+    </Library>
+    <Library Include="glfw-3.2.1.bin.WIN32\lib-vc2015\glfw3dll.lib">
+      <Filter>Resource Files\GLFW\lib</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
@@ -305,9 +320,6 @@
     <ClInclude Include="SDL\include\SDL_video.h">
       <Filter>Resource Files\SDL\include</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -326,6 +338,27 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3.h">
+      <Filter>Resource Files\GLFW\include</Filter>
+    </ClInclude>
+    <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h">
+      <Filter>Resource Files\GLFW\include</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteBasic.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -339,12 +372,10 @@
     <None Include="tutorialVertexShader.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
@@ -360,6 +391,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteBasic.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
