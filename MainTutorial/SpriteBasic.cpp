@@ -20,10 +20,10 @@ void SpriteBasic::Update()
 void SpriteBasic::Serialize(FILE** fpp)
 {
 	std::string name("Resources\\");
-	std::string file;
-	fscanf_s(*fpp, "%s\n",&file);
+	char file[100];
+	fscanf(*fpp, "%s\n",&file);
 	name += file;
 	spriteName = name;
-	ResourceMgr.loadSurface(name.c_str());
+	ResourceMgr.loadSurface(name);
 
 }

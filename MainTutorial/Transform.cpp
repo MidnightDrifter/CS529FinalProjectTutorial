@@ -21,5 +21,5 @@ void Transform::Update()
 
 void Transform::Serialize(FILE** fpp)
 {
-	fscanf_s(*fpp, "%f, %f\n", &xPos, &yPos);
+	fscanf(*fpp, "%f, %f\n", &xPos, &yPos);
 }

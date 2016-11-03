@@ -12,7 +12,7 @@ public:
 	~ResourceManager();
 
 	SDL_Surface * loadSurface(std::string fileName);
-	SDL_Surface* loadSurface(char* filename);
+	SDL_Surface* loadSurface(const char* filename);
 
 private:
 	std::unordered_map<std::string, SDL_Surface *> mSurfaces;

@@ -23,7 +23,7 @@ Component* GameObject::getComponent(COMPONENT_TYPE c)
 		if((*i)->getType() == c)
 		{
 			out = (*i);
-			i = this->components.end();
+			break;
 		}
 	}
 	return out;
@@ -39,6 +39,7 @@ void GameObject::Update()
 
 void GameObject::addComponent(Component* c)
 {
+	c->setOwner(this);
 	components.push_back(c);
 }
 

@@ -18,7 +18,7 @@ ResourceManager::~ResourceManager()
 
 
 
-SDL_Surface * ResourceManager::loadSurface(char* fileName)
+SDL_Surface * ResourceManager::loadSurface(const char* fileName)
 {
 	SDL_Surface *pSurface = mSurfaces[fileName];
 
@@ -41,5 +41,7 @@ SDL_Surface * ResourceManager::loadSurface(char* fileName)
 
 SDL_Surface * ResourceManager::loadSurface(std::string fileName)
 {
-	return loadSurface(fileName.c_str());
+	
+	const char *name = fileName.c_str();
+	return loadSurface(name);
 }

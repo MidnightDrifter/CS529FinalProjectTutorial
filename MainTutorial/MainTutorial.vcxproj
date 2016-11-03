@@ -289,6 +289,10 @@
     <Image Include="Resources\dark_pursuit_small_left.bmp" />
     <Image Include="Resources\dark_pursuit_small_right.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestSerializerPlayerChar.txt" />
+    <Text Include="Text File Layout Example.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,0 +1,5 @@
+Transform
+50.0 50.0
+Sprite
+dark_pursuit_small_left.bmp
+Controller

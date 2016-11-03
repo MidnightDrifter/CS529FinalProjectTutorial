@@ -359,11 +359,11 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteComplex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComplex.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -414,11 +414,11 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteComplex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicsManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComplex.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,5 +434,11 @@
     <Image Include="Resources\darkpursuit.bmp">
       <Filter>Resources</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text File Layout Example.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="TestSerializerPlayerChar.txt" />
   </ItemGroup>
 </Project>

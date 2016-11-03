@@ -88,29 +88,34 @@ window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_C
 
 GameObject* LoadObject(const char *pFilename)
 {
-	GameObject* obj = NULL;
+	GameObject* obj = new GameObject();
 	FILE* fp;
-	fopen_s(&fp, pFilename, "r");
-
-	std::string name("");
+	errno_t err = fopen_s(&fp, pFilename, "r");
+	if (err)
+	{
+		printf("Error opening file, terminating.\n");
+		exit(-1);
+	}
+	char name[100];
 		while (!feof(fp))
 		{
-			fscanf_s(fp, "%s\n", &name);
-			if (0==name.compare("Transform"))
+			memset(name, 0, sizeof(char) * 100);
+			fscanf(fp, "%s\n", name);
+			if (0==strcmp(name,"Transform"))
 			{
 				Transform* t = new Transform();
 				t->Serialize(&fp);
 				obj->addComponent(t);
 			}
 
-			else if (0==name.compare("Sprite"))
+			else if (0==strcmp("Sprite",name))
 			{
 				SpriteBasic* t = new SpriteBasic();
 				t->Serialize(&fp);
 				obj->addComponent(t);
 			}
 
-			else if (0 == name.compare("Controller"))
+			else if (0 == strcmp(name,"Controller"))
 			{
 				Controller* t = new Controller();
 				t->Serialize(&fp);
@@ -124,6 +129,7 @@ GameObject* LoadObject(const char *pFilename)
 			}
 */
 		}
+		fclose(fp);
 		return obj;
 }
 
@@ -154,6 +160,10 @@ int main(int argc, char* argv[])
 	//ppImage[1] = SDL_LoadBMP("Resources\\dark_pursuit_small_down.bmp");
 	//ppImage[2] = SDL_LoadBMP("Resources\\dark_pursuit_small_left.bmp");
 	//ppImage[3] = SDL_LoadBMP("Resources\\dark_pursuit_small_right.bmp");
+	GameObject * testObject = LoadObject("TestSerializerPlayerChar.txt");
+	Transform* testTransform = static_cast<Transform*>(testObject->getComponent(COMPONENT_TYPE::TRANSFORM));
+	SpriteBasic* testSprite = static_cast<SpriteBasic*>(testObject->getComponent(COMPONENT_TYPE::SPRITE));
+	Controller* testController = static_cast<Controller*>(testObject->getComponent(COMPONENT_TYPE::CONTROLLER));
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
