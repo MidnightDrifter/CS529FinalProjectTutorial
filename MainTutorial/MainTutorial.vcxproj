@@ -160,6 +160,8 @@
     <Library Include="SDL\lib\win32\SDL2.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Body.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="FramerateController.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
     <ClInclude Include="SDL\include\close_code.h" />
@@ -269,6 +272,8 @@
     <None Include="tutorialVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Body.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="FramerateController.cpp" />
@@ -277,6 +282,7 @@
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBasic.cpp" />

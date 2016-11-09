@@ -14,6 +14,9 @@ public:
 	void minusEqualX(float f) { xPos -= f; }
 	void minusEqualY(float f) { yPos -= f; }
 
+	void setX(float f) { xPos = f; }
+	void setY(float f) { yPos = f; }
+
 	float getX() { return xPos; }
 	float getY() { return yPos; }
 

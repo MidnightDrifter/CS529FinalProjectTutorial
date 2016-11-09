@@ -1,5 +1,6 @@
 #include "Transform.h"
 
+//extern InputManager InputMgr;
 
 
 Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)

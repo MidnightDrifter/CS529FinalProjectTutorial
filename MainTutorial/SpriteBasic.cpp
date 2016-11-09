@@ -17,6 +17,11 @@ void SpriteBasic::Update()
 
 }
 
+SDL_Surface SpriteBasic::getSprite()
+{
+	return ResourceMgr.loadSurface(spriteName);
+}
+
 void SpriteBasic::Serialize(FILE** fpp)
 {
 	std::string name("Resources\\");

@@ -17,7 +17,10 @@
 #include "Transform.h"
 #include "SpriteBasic.h"
 #include "Controller.h"
-
+#include "Body.h"
+#include "GameObjectManager.h"
+#include "PhysicsManager.h"
+#include "CollisionManager.h"
 #pragma comment (lib, "glew32.lib")
 #pragma comment (lib, "glfw3.lib")
 # define GL3_PROTOTYPES 1
@@ -26,6 +29,7 @@ const int SCREEN_WIDTH = 1200;
 const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
 const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
 const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
+const float GRAVITY = 0.f;
 //Woo
 int test;
 //Shader shader;
@@ -36,6 +40,9 @@ SDL_GLContext context;
 InputManager InputMgr = InputManager();
 FramerateController framerateController = FramerateController(5);
 ResourceManager ResourceMgr = ResourceManager();
+GameObjectManager GameObjMgr = GameObjectManager();
+PhysicsManager PhysicsMgr = PhysicsManager();
+CollisionManager CollisionMgr = CollisionManager();
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -105,6 +112,7 @@ GameObject* LoadObject(const char *pFilename)
 			{
 				Transform* t = new Transform();
 				t->Serialize(&fp);
+				
 				obj->addComponent(t);
 			}
 
@@ -122,6 +130,13 @@ GameObject* LoadObject(const char *pFilename)
 				obj->addComponent(t);
 
 			}
+
+			else if (0 == strcmp(name, "Body"))
+			{
+				Body* t = new Body();
+				t->Serialize(&fp);
+				obj->addComponent(t);
+			}
 /*  AI Component thing
 			else if (0 == name.compare(""))
 			{
@@ -130,6 +145,7 @@ GameObject* LoadObject(const char *pFilename)
 */
 		}
 		fclose(fp);
+		GameObjMgr.objects.push_back(obj);
 		return obj;
 }
 
@@ -228,8 +244,8 @@ int main(int argc, char* argv[])
 			while (isRunning)
 			{
 				framerateController.FrameStart();
-				
-				
+
+
 				SDL_Event e;
 				while (SDL_PollEvent(&e) != 0)
 				{
@@ -238,13 +254,13 @@ int main(int argc, char* argv[])
 						isRunning = false;
 					}
 				}
-				
-				
 
 
 
-				
-				
+
+
+
+				/*
 
 				if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 				{
@@ -280,7 +296,7 @@ int main(int argc, char* argv[])
 				{
 					isRunning = false;
 				}
-				/*
+				
 				SDL_BlitSurface(ppImage[testing], NULL, winSurface, NULL);
 				SDL_UpdateWindowSurface(window);
 				testing = (testing + 1) % 4;
@@ -289,9 +305,40 @@ int main(int argc, char* argv[])
 				bob = bob;
 				*/
 
-				SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
-				SDL_UpdateWindowSurface(window);
+			//	SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
+			
 				InputMgr.Update();
+
+
+				PhysicsMgr.Integrate(framerateController.getFrameTime());
+
+
+				for (GameObject* g : GameObjMgr.objects)
+				{
+				
+					g->Update();
+
+				}
+
+				SDL_FillRect(winSurface, NULL, 0);
+
+
+				for (GameObject* g : GameObjMgr.objects)
+				{
+					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
+					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+					if (t != NULL && s != NULL)
+					{
+						SDL_Rect destRect;
+						destRect.x = t->getX();
+						destRect.y = t->getY();
+
+						SDL_BlitSurface(&s->getSprite(), NULL, winSurface, &destRect);
+					}
+					
+				}
+				SDL_UpdateWindowSurface(window);
+
 				framerateController.FrameEnd();
 			}	//GAME LOOP HERE
 

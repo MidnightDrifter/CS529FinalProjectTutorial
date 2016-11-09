@@ -2,9 +2,12 @@
 #include "Component.h"
 
 
-GameObject::GameObject() : components()
+GameObject::GameObject() : components(), type(GAME_OBJECT_TYPE::NULLTYPE)
 {
 }
+
+
+GameObject::GameObject(GAME_OBJECT_TYPE t) : components(), type(t) {}
 
 
 GameObject::~GameObject()

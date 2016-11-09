@@ -6,11 +6,18 @@
 //#include "Controller.h"
 //class Component;
 
+enum class GAME_OBJECT_TYPE
+{
+	PLAYER,
+	ASTEROID,
+	NULLTYPE
+};
 
 class GameObject
 {
 public:
 	GameObject();
+	GameObject(GAME_OBJECT_TYPE t);
 	~GameObject();
 	//Controller* getController();
 	//SpriteBasic* getSprite();
@@ -24,6 +31,7 @@ private:
 	//SpriteBasic* sprite;
 	//Transform* transform;
 	std::vector<Component*> components;
+	GAME_OBJECT_TYPE type;
 
 };
 

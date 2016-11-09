@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "ResourceManager.h"
+#include <SDL.h>
 #include <string>
 class SpriteBasic :
 	public Component
@@ -11,7 +12,7 @@ public:
 	virtual ~SpriteBasic();
 	void Serialize(FILE** fpp);
 	void Update();
-
+	SDL_Surface getSprite();
 
 private:
 

@@ -9,7 +9,7 @@ public:
 	void Update();
 
 
-private:
+
 	std::vector<GameObject*> objects;
 
 };

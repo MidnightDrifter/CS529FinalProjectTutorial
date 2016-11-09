@@ -3,3 +3,7 @@ Transform
 Sprite
 dark_pursuit_small_left.bmp
 Controller
+Body
+2.0 
+Circle  
+50.0  
