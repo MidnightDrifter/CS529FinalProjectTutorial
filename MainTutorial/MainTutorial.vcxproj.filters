@@ -49,6 +49,12 @@
     <Filter Include="Resource Files\GLFW\lib">
       <UniqueIdentifier>{aa759e52-e5e4-464d-8a2d-51e2d8dbe459}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Project 2D Classes">
+      <UniqueIdentifier>{8055e750-ad52-49e3-80d4-49c3579baac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Project 2D Classes">
+      <UniqueIdentifier>{a8028b05-8fd7-4774-b3cd-1f84d8143e38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib">
@@ -374,6 +380,15 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Math2D.h">
+      <Filter>Header Files\Project 2D Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix2D.h">
+      <Filter>Header Files\Project 2D Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files\Project 2D Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -437,6 +452,15 @@
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Math2D.c">
+      <Filter>Source Files\Project 2D Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2D.c">
+      <Filter>Source Files\Project 2D Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.c">
+      <Filter>Source Files\Project 2D Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
