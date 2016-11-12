@@ -2,11 +2,6 @@
 extern ResourceManager ResourceMgr;
 
 
-SpriteBasic::SpriteBasic(): Component(COMPONENT_TYPE::SPRITE), spriteName("")
-{
-
-}
-
 
 SpriteBasic::~SpriteBasic()
 {
@@ -17,9 +12,9 @@ void SpriteBasic::Update()
 
 }
 
-SDL_Surface SpriteBasic::getSprite()
+SDL_Surface* SpriteBasic::getSprite()
 {
-	return ResourceMgr.loadSurface(spriteName);
+	return (ResourceMgr.loadSurface(spriteName));
 }
 
 void SpriteBasic::Serialize(FILE** fpp)

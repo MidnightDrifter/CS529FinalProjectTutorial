@@ -8,11 +8,13 @@ class SpriteBasic :
 	public Component
 {
 public:
-	SpriteBasic();
+	SpriteBasic() : Component(COMPONENT_TYPE::SPRITE) {}
+	SpriteBasic(const char* c) : spriteName(c), Component(COMPONENT_TYPE::SPRITE) {}
+	SpriteBasic(std::string s) : spriteName(s), Component(COMPONENT_TYPE::SPRITE) {}
 	virtual ~SpriteBasic();
 	void Serialize(FILE** fpp);
 	void Update();
-	SDL_Surface getSprite();
+	SDL_Surface* getSprite();
 
 private:
 

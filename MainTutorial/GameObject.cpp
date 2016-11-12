@@ -2,6 +2,7 @@
 #include "Component.h"
 
 
+
 GameObject::GameObject() : components(), type(GAME_OBJECT_TYPE::NULLTYPE)
 {
 }

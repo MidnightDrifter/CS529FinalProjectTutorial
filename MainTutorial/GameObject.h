@@ -10,6 +10,7 @@ enum class GAME_OBJECT_TYPE
 {
 	PLAYER,
 	ASTEROID,
+	BULLET,
 	NULLTYPE
 };
 
@@ -25,6 +26,8 @@ public:
 	Component* getComponent(COMPONENT_TYPE c);
 	void Update();
 	void addComponent(Component* p);
+	
+
 
 private:
 	//Controller* controller;

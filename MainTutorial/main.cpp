@@ -30,6 +30,13 @@ const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
 const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
 const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
 const float GRAVITY = 0.f;
+
+const float INSTRUCTION_POS_X = 0.f;
+const float INSTRUCTION_POS_Y = -200.f;
+
+
+const float INSTRUCTION_WIDTH = 1.f;
+const float INSTRUCTION_HEIGHT = 1.f;  //Update & change these based on the size of the .bmp I make
 //Woo
 int test;
 //Shader shader;
@@ -333,7 +340,7 @@ int main(int argc, char* argv[])
 						destRect.x = t->getX();
 						destRect.y = t->getY();
 
-						SDL_BlitSurface(&s->getSprite(), NULL, winSurface, &destRect);
+						SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
 					}
 					
 				}

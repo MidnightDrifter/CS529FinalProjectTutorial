@@ -48,13 +48,16 @@ bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape*
 	
 
 	//If collision, create contact
+	if (true) //Collision check goes here
+	{
+		Contact*pc = new Contact();
+		pc->bodiesColliding[0] = circle1->bodyOwner;
+		pc->bodiesColliding[1] = circle2->bodyOwner;
 
-	Contact*pc = new Contact();
-	pc->bodiesColliding[0] = circle1->bodyOwner;
-	pc->bodiesColliding[1] = circle2->bodyOwner;
-
-	c.push_back(pc);
-
+		c.push_back(pc);
+		return true;
+	}
+	return false;
 }
 
 
@@ -64,13 +67,16 @@ bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2
 
 
 	//If collision, create contact
-
-	Contact*pc = new Contact();
+	if (true) //Collision check goes here 
+	{
+		Contact*pc = new Contact();
 	pc->bodiesColliding[0] = AABB1->bodyOwner;
 	pc->bodiesColliding[1] = AABB2->bodyOwner;
 
 	c.push_back(pc);
-
+	return true;
+	}
+	return false;
 }
 
 
@@ -82,12 +88,16 @@ bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* A
 
 	//If collision, create contact
 
-	Contact*pc = new Contact();
-	pc->bodiesColliding[0] = circle1->bodyOwner;
-	pc->bodiesColliding[1] = AABB2->bodyOwner;
+	if (true) //Collision check goes here
+	{
+		Contact*pc = new Contact();
+		pc->bodiesColliding[0] = circle1->bodyOwner;
+		pc->bodiesColliding[1] = AABB2->bodyOwner;
 
-	c.push_back(pc);
-
+		c.push_back(pc);
+		return true;
+	}
+	return false;
 }
 
 

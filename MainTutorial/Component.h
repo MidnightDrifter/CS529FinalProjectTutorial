@@ -7,8 +7,8 @@ enum class COMPONENT_TYPE
 	CONTROLLER,
 	TRANSFORM,
 	SPRITE,
-	BODY,
-	PHYSICS
+	BODY
+	
 	
 
 
