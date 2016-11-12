@@ -19,7 +19,17 @@ ShapeCircle::~ShapeCircle() {}
 
 bool ShapeCircle::TestPoint(float x, float y)
 {
-	return true;
+	Vector2D* point;
+	point->x = x;
+	point->y = y;
+
+	Vector2D* c;
+	c->x = this->bodyOwner->currPosX;
+	c->y = this->bodyOwner->currPosY;
+
+
+
+	return 1==StaticPointToStaticCircle(point,c,this->radius);
 }
 
 
@@ -27,7 +37,17 @@ ShapeAABB::ShapeAABB() : Shape(SHAPE_TYPE::AABB), left(0.f), right(0.f), top(0.f
 ShapeAABB::~ShapeAABB() {}
 bool ShapeAABB::TestPoint(float x, float y)
 {
-	return true;
+	Vector2D* point;
+	point->x = x;
+	point->y = y;
+	float w = this->right - this->left;
+	float h = this->top - this->bot;
+	Vector2D* rect;
+	rect->x = this->bodyOwner->currPosX;
+	rect->y = this->bodyOwner->currPosY;
+
+	return 1 == StaticPointToStaticRect(point, rect, w, h);
+	
 }
 
 
@@ -61,6 +81,10 @@ bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape*
 bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c)
 {
 	//Check for collision between shapes
+	Vector2D* rect1, *rect2;
+	float w1, w2, h1, h2;
+
+
 
 
 	//If collision, create contact

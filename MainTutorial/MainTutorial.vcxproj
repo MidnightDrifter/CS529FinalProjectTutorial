@@ -175,6 +175,8 @@
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Math2D.h" />
+    <ClInclude Include="Matrix2D.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
@@ -262,6 +264,7 @@
     <ClInclude Include="SpriteBasic.h" />
     <ClInclude Include="SpriteComplex.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
@@ -282,12 +285,15 @@
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Math2D.c" />
+    <ClCompile Include="Matrix2D.c" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBasic.cpp" />
     <ClCompile Include="SpriteComplex.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector2D.c" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\darkpursuit.bmp" />
