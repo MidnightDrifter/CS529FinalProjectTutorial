@@ -3,6 +3,8 @@
 #include "SpriteBasic.h"
 #include "Body.h"
 #include "Transform.h"
+#include "Controller.h"
+#include "Homing.h"
 #include <vector>
 class GameObjectManager
 {
@@ -11,7 +13,7 @@ public:
 	~GameObjectManager();
 	void Update();
 	GameObject* spawnObject(GAME_OBJECT_TYPE g);
-
+	GameObject* LoadObject(const char* c);
 
 
 	std::vector<GameObject*> objects;

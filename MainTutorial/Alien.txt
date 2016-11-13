@@ -1,0 +1,9 @@
+Transform
+100.0 100.0
+Sprite
+Alien.bmp
+Body
+15.0
+Circle
+0.5
+Homing

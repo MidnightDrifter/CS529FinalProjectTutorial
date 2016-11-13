@@ -97,7 +97,7 @@ window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_C
 
 	return true;
 }
-*/
+
 
 
 GameObject* LoadObject(const char *pFilename)
@@ -149,13 +149,13 @@ GameObject* LoadObject(const char *pFilename)
 			{
 
 			}
-*/
+
 		}
 		fclose(fp);
 		GameObjMgr.objects.push_back(obj);
 		return obj;
 }
-
+*/
 
 
 int main(int argc, char* argv[])
@@ -183,7 +183,7 @@ int main(int argc, char* argv[])
 	//ppImage[1] = SDL_LoadBMP("Resources\\dark_pursuit_small_down.bmp");
 	//ppImage[2] = SDL_LoadBMP("Resources\\dark_pursuit_small_left.bmp");
 	//ppImage[3] = SDL_LoadBMP("Resources\\dark_pursuit_small_right.bmp");
-	GameObject * testObject = LoadObject("TestSerializerPlayerChar.txt");
+	GameObject * testObject = GameObjMgr.LoadObject("TestSerializerPlayerChar.txt");
 	Transform* testTransform = static_cast<Transform*>(testObject->getComponent(COMPONENT_TYPE::TRANSFORM));
 	SpriteBasic* testSprite = static_cast<SpriteBasic*>(testObject->getComponent(COMPONENT_TYPE::SPRITE));
 	Controller* testController = static_cast<Controller*>(testObject->getComponent(COMPONENT_TYPE::CONTROLLER));

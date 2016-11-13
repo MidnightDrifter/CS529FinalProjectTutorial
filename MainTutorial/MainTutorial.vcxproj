@@ -174,6 +174,7 @@
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3.h" />
     <ClInclude Include="glfw-3.2.1.bin.WIN32\include\GLFW\glfw3native.h" />
     <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="Homing.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Math2D.h" />
     <ClInclude Include="Matrix2D.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="Homing.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math2D.c" />
@@ -302,6 +304,11 @@
     <Image Include="Resources\dark_pursuit_small_right.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Alien.txt" />
+    <Text Include="Asteroid.txt" />
+    <Text Include="Bullet.txt" />
+    <Text Include="HomingMissile.txt" />
+    <Text Include="Player.txt" />
     <Text Include="TestSerializerPlayerChar.txt" />
     <Text Include="Text File Layout Example.txt" />
   </ItemGroup>

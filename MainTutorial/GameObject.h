@@ -11,6 +11,7 @@ enum class GAME_OBJECT_TYPE
 	PLAYER,
 	ASTEROID,
 	BULLET,
+	ALIEN,
 	NULLTYPE
 };
 
@@ -26,7 +27,7 @@ public:
 	Component* getComponent(COMPONENT_TYPE c);
 	void Update();
 	void addComponent(Component* p);
-	
+	GAME_OBJECT_TYPE getType() const { return type; }
 
 
 private:
