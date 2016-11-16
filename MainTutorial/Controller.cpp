@@ -26,22 +26,22 @@ void Controller::Update()
 	//if left key pressed
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(30.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(300.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (30.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (300.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (30.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (300.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (30.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (300.f);
 	}
 	
 	/*

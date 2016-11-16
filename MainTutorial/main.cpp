@@ -46,7 +46,7 @@ SDL_Surface* surface;
 SDL_Surface* winSurface;
 SDL_GLContext context;
 InputManager& InputMgr = InputManager();
-FramerateController& framerateController = FramerateController(5);
+FramerateController& framerateController = FramerateController(30);
 ResourceManager& ResourceMgr = ResourceManager();
 GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
@@ -339,7 +339,7 @@ int main(int argc, char* argv[])
 
 
 
-				//SDL_FillRect(winSurface, NULL, 0);
+				SDL_FillRect(winSurface, NULL, 0);
 				SDL_Rect destRect;
 
 				// 512 x 365
