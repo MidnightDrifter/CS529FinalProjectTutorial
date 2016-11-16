@@ -58,6 +58,12 @@
     <Filter Include="Resource Files\Serialization Text Files">
       <UniqueIdentifier>{9daba98a-b32c-4440-9629-17affa80f9d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Project 2D Classes\C">
+      <UniqueIdentifier>{ead6889e-dc7f-4c8b-aa11-76b4d06ff79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Project 2D Classes\C++">
+      <UniqueIdentifier>{abf6a5fd-08bd-4528-96ff-6573ff83190b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32\glew32s.lib">
@@ -395,6 +401,12 @@
     <ClInclude Include="Homing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -450,26 +462,41 @@
     <ClCompile Include="SpriteComplex.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Body.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math2D.c">
-      <Filter>Source Files\Project 2D Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix2D.c">
-      <Filter>Source Files\Project 2D Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.c">
-      <Filter>Source Files\Project 2D Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Homing.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Math2D.c">
+      <Filter>Source Files\Project 2D Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2D.c">
+      <Filter>Source Files\Project 2D Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.c">
+      <Filter>Source Files\Project 2D Classes\C</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Source Files\Project 2D Classes\C++</Filter>
+    </ClCompile>
+    <ClCompile Include="Math2D.cpp">
+      <Filter>Source Files\Project 2D Classes\C++</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix2D.cpp">
+      <Filter>Source Files\Project 2D Classes\C++</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

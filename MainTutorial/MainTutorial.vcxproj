@@ -160,10 +160,12 @@
     <Library Include="SDL\lib\win32\SDL2.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="FramerateController.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -276,10 +278,12 @@
     <None Include="tutorialVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FramerateController.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -288,7 +292,9 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math2D.c" />
+    <ClCompile Include="Math2D.cpp" />
     <ClCompile Include="Matrix2D.c" />
+    <ClCompile Include="Matrix2D.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -296,6 +302,7 @@
     <ClCompile Include="SpriteComplex.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2D.c" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\darkpursuit.bmp" />

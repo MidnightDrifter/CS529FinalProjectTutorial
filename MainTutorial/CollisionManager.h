@@ -58,6 +58,7 @@ class ShapeAABB : public Shape
 {
 public:
 	ShapeAABB();
+	ShapeAABB(float l, float r, float t, float b) : Shape(SHAPE_TYPE::AABB), top(t), bot(b), left(l), right(r) {}
 	~ShapeAABB();
 
 	virtual bool TestPoint(float x, float y);

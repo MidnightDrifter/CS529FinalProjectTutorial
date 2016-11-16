@@ -45,22 +45,25 @@ GameObject* GameObjectManager::spawnObject(GAME_OBJECT_TYPE g)
 		//obj->addComponent(&t);
 
 
-		obj = LoadObject("Bullet.txt");
-
+		obj = LoadObject("TextFiles\\Bullet.txt");
+		obj->setType(GAME_OBJECT_TYPE::BULLET);
 	}
 
 	else if (g == GAME_OBJECT_TYPE::ASTEROID)
 	{
-		obj = LoadObject("Asteroid.txt");
+		obj = LoadObject("TextFiles\\Asteroid.txt");
+		obj->setType(GAME_OBJECT_TYPE::ASTEROID);
 	}
 
 	else if (g == GAME_OBJECT_TYPE::PLAYER)
 	{
-		obj = LoadObject("Player.txt");
+		obj = LoadObject("TextFiles\\Player.txt");
+		obj->setType(GAME_OBJECT_TYPE::PLAYER);
 	}
 	else if (g == GAME_OBJECT_TYPE::ALIEN)
 	{
-		obj = LoadObject("Alien.txt");
+		obj = LoadObject("TextFiles\\Alien.txt");
+		obj->setType(GAME_OBJECT_TYPE::ALIEN);
 	}
 	if (obj)
 	{
@@ -121,8 +124,8 @@ GameObject* GameObjectManager::LoadObject(const char *pFilename)
 		else if (0 == strcmp(name, "Homing"))
 		{
 			Homing* h = new Homing();
-			h->serialize(&fp);
-			obj->addComponent();
+			h->Serialize(&fp);
+			obj->addComponent(h);
 		}
 		/*  AI Component thing
 		else if (0 == name.compare(""))

@@ -1,9 +1,9 @@
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
 #include "Transform.h"
-extern GameObjectManager GameObjMgr;
+extern GameObjectManager& GameObjMgr;
 //extern FramerateController framerateController;
-extern CollisionManager CollisionMgr;
+extern CollisionManager& CollisionMgr;
 PhysicsManager::PhysicsManager()
 {
 }
@@ -20,7 +20,7 @@ void PhysicsManager::Integrate(float deltaTime)
 		Body *pBody = (Body*)g->getComponent(COMPONENT_TYPE::BODY);
 		if (pBody)
 		{
-			pBody->Integrate(deltaTime *0.001, GRAVITY);
+			pBody->Integrate(deltaTime, GRAVITY);
 		}
 
 
@@ -57,8 +57,18 @@ void PhysicsManager::Integrate(float deltaTime)
 			}
 		}
 
+		for (auto a : CollisionMgr.contacts)
+		{
+			CollisionEvent c;
+			c.pObject1 = a->bodiesColliding[0]->owner;
+			c.pObject2 = a->bodiesColliding[1]->owner;
 
-	
+			a->bodiesColliding[0]->owner->HandleEvent(&c);
+			a->bodiesColliding[1]->owner->HandleEvent(&c);
+		}
+
+
+		//Commit changes from physics -> transform	
 		for (GameObject* g : GameObjMgr.objects)
 		{
 			Body *pBody = (Body*)g->getComponent(COMPONENT_TYPE::BODY);

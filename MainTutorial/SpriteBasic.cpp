@@ -1,5 +1,5 @@
 #include "SpriteBasic.h"
-extern ResourceManager ResourceMgr;
+extern ResourceManager& ResourceMgr;
 
 
 

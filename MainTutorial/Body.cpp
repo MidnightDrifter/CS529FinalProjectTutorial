@@ -108,7 +108,7 @@ void Body::Serialize(FILE** fpp)
 		shape = new ShapeAABB();
 		shape->bodyOwner = this;
 		ShapeAABB* a = (ShapeAABB*)shape;
-		fscanf(*fpp, "%f %f %f %f\n", &a->left, &a->right, &a->top, &a->bot);
+		fscanf(*fpp, "%f, %f, %f, %f\n", &a->left, &a->right, &a->top, &a->bot);
 	}
 
 

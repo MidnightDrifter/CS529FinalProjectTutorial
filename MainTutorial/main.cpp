@@ -21,6 +21,7 @@
 #include "GameObjectManager.h"
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 #pragma comment (lib, "glew32.lib")
 #pragma comment (lib, "glfw3.lib")
 # define GL3_PROTOTYPES 1
@@ -44,12 +45,13 @@ SDL_Window* window;
 SDL_Surface* surface;
 SDL_Surface* winSurface;
 SDL_GLContext context;
-InputManager InputMgr = InputManager();
-FramerateController framerateController = FramerateController(5);
-ResourceManager ResourceMgr = ResourceManager();
-GameObjectManager GameObjMgr = GameObjectManager();
-PhysicsManager PhysicsMgr = PhysicsManager();
-CollisionManager CollisionMgr = CollisionManager();
+InputManager& InputMgr = InputManager();
+FramerateController& framerateController = FramerateController(5);
+ResourceManager& ResourceMgr = ResourceManager();
+GameObjectManager& GameObjMgr = GameObjectManager();
+PhysicsManager& PhysicsMgr = PhysicsManager();
+CollisionManager& CollisionMgr = CollisionManager();
+EventManager& EventMgr = EventManager();
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -183,10 +185,10 @@ int main(int argc, char* argv[])
 	//ppImage[1] = SDL_LoadBMP("Resources\\dark_pursuit_small_down.bmp");
 	//ppImage[2] = SDL_LoadBMP("Resources\\dark_pursuit_small_left.bmp");
 	//ppImage[3] = SDL_LoadBMP("Resources\\dark_pursuit_small_right.bmp");
-	GameObject * testObject = GameObjMgr.LoadObject("TestSerializerPlayerChar.txt");
-	Transform* testTransform = static_cast<Transform*>(testObject->getComponent(COMPONENT_TYPE::TRANSFORM));
-	SpriteBasic* testSprite = static_cast<SpriteBasic*>(testObject->getComponent(COMPONENT_TYPE::SPRITE));
-	Controller* testController = static_cast<Controller*>(testObject->getComponent(COMPONENT_TYPE::CONTROLLER));
+//	GameObject * testObject = GameObjMgr.LoadObject("TestSerializerPlayerChar.txt");
+//	Transform* testTransform = static_cast<Transform*>(testObject->getComponent(COMPONENT_TYPE::TRANSFORM));
+//	SpriteBasic* testSprite = static_cast<SpriteBasic*>(testObject->getComponent(COMPONENT_TYPE::SPRITE));
+//	Controller* testController = static_cast<Controller*>(testObject->getComponent(COMPONENT_TYPE::CONTROLLER));
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -209,9 +211,12 @@ int main(int argc, char* argv[])
 			return false;
 		}
 		winSurface = SDL_GetWindowSurface(window);
+		/*
 		SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
 		SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
 		SDL_UpdateWindowSurface(window);
+		
+		*/
 		//Create window
 		//window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 
@@ -248,6 +253,10 @@ int main(int argc, char* argv[])
 		//	int i = 0;
 			bool isRunning = true;
 			int testing = 0;
+
+
+			GameObject* startingObject = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
+
 			while (isRunning)
 			{
 				framerateController.FrameStart();
@@ -316,9 +325,9 @@ int main(int argc, char* argv[])
 			
 				InputMgr.Update();
 
-
-				PhysicsMgr.Integrate(framerateController.getFrameTime());
-
+				float frametime = (float)(framerateController.getFrameTime()) / 1000.f;
+				PhysicsMgr.Integrate(frametime/1000.f);
+				EventMgr.Update(frametime);
 
 				for (GameObject* g : GameObjMgr.objects)
 				{
@@ -327,7 +336,15 @@ int main(int argc, char* argv[])
 
 				}
 
-				SDL_FillRect(winSurface, NULL, 0);
+
+
+
+				//SDL_FillRect(winSurface, NULL, 0);
+				SDL_Rect destRect;
+
+				// 512 x 365
+				destRect.w = 512;
+				destRect.h = 365;
 
 
 				for (GameObject* g : GameObjMgr.objects)
@@ -336,9 +353,11 @@ int main(int argc, char* argv[])
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
 					if (t != NULL && s != NULL)
 					{
-						SDL_Rect destRect;
 						destRect.x = t->getX();
 						destRect.y = t->getY();
+					//	destRect.x = 100.f;
+					//	destRect.y = 100.f;
+
 
 						SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
 					}

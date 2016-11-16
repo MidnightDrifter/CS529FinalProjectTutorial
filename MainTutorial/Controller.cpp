@@ -4,9 +4,12 @@
 #include "GameObjectManager.h"
 #include "ResourceManager.h"
 #include "Body.h"
-extern InputManager InputMgr;
-extern GameObjectManager GameObjMgr;
-extern ResourceManager ResourceMgr;
+#include "EventManager.h"
+#include "PhysicsManager.h"
+extern InputManager& InputMgr;
+extern GameObjectManager& GameObjMgr;
+extern ResourceManager& ResourceMgr;
+extern EventManager& EventMgr;
 
 Controller::Controller() : Component(COMPONENT_TYPE::CONTROLLER)
 {
@@ -23,22 +26,22 @@ void Controller::Update()
 	//if left key pressed
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(3.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(30.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (3.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (30.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (3.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (30.f);
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (3.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (30.f);
 	}
 	
 	/*
@@ -85,10 +88,32 @@ void Controller::Update()
 	}
 	
 	
-	
 
 
 
 
 
+
+}
+
+
+void Controller::handleEvent(Event* e)
+{
+	if (e->eType == EVENT_TYPE::COLLISION)
+	{
+		CollisionEvent* cEvent = static_cast<CollisionEvent*>(e);
+		Body* b = static_cast<Body*>(owner->getComponent(COMPONENT_TYPE::BODY));
+
+		if (NULL != b)
+		{
+			//If something with a controller component collides with something, reset its position
+			b->currPosX = 0;
+			b->currPosY = 0;
+		}
+
+		//Timer of 2s
+		PlayerHitEvent* phe = new PlayerHitEvent();
+		phe->timer = 2;
+		EventMgr.AddEvent(phe);
+	}
 }

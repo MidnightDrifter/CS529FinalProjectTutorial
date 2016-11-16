@@ -5,7 +5,7 @@
 //#include "Transform.h"
 //#include "Controller.h"
 //class Component;
-
+class Event;
 enum class GAME_OBJECT_TYPE
 {
 	PLAYER,
@@ -28,6 +28,8 @@ public:
 	void Update();
 	void addComponent(Component* p);
 	GAME_OBJECT_TYPE getType() const { return type; }
+	void HandleEvent(Event* e);
+	void setType(GAME_OBJECT_TYPE t) { type = t; }
 
 
 private:

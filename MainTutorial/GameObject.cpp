@@ -47,5 +47,12 @@ void GameObject::addComponent(Component* c)
 	components.push_back(c);
 }
 
+void GameObject::HandleEvent(Event* e)
+{
+	for (auto a : components)
+	{
+		a->handleEvent(e);
+	}
+}
 
 
