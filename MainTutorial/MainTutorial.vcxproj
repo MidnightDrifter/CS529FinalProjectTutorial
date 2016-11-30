@@ -90,12 +90,14 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)\glfw-3.2.1.bin.WIN32\include\GLFW;$(ProjectDir)\SDL\include;$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\include\GL;$(ProjectDir)\%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
     </ClCompile>
     <Link>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glfw3dll.lib;glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(ProjectDir)\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)\glew-2.0.0-win32\glew-2.0.0\lib\Release\Win32;$(ProjectDir)\SDL2-2.0.4\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LinkStatus>false</LinkStatus>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
@@ -267,6 +269,7 @@
     <ClInclude Include="SpriteBasic.h" />
     <ClInclude Include="SpriteComplex.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="transformMAT4.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +294,7 @@
     <ClCompile Include="Homing.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Math2D.c" />
     <ClCompile Include="Math2D.cpp" />
-    <ClCompile Include="Matrix2D.c" />
     <ClCompile Include="Matrix2D.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -301,7 +302,7 @@
     <ClCompile Include="SpriteBasic.cpp" />
     <ClCompile Include="SpriteComplex.cpp" />
     <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Vector2D.c" />
+    <ClCompile Include="transformMAT4.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>

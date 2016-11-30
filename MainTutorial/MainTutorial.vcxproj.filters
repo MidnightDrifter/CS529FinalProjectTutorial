@@ -407,6 +407,9 @@
     <ClInclude Include="AI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="transformMAT4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -471,15 +474,6 @@
     <ClCompile Include="Homing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math2D.c">
-      <Filter>Source Files\Project 2D Classes\C</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix2D.c">
-      <Filter>Source Files\Project 2D Classes\C</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.c">
-      <Filter>Source Files\Project 2D Classes\C</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2D.cpp">
       <Filter>Source Files\Project 2D Classes\C++</Filter>
     </ClCompile>
@@ -497,6 +491,9 @@
     </ClCompile>
     <ClCompile Include="Body.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="transformMAT4.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "transformMAT4.h"
 class Transform :
 	public Component
 {
@@ -20,9 +21,25 @@ public:
 	float getX() { return xPos; }
 	float getY() { return yPos; }
 
+	void setXScale(float f) { xScale = f; }
+	void setYScale(float f) { yScale = f; }
+	void setRotation(float f) { rotation = f; }
+
+
+	float getXScale() const { return xScale; }
+	float getYScale() const { return yScale; }
+	float getRotation() const { return rotation; }  //check degree vs. rad ???
+
+
+
 private:
 	float xPos;
 	float yPos;
+	float xScale;
+	float yScale;
+	float rotation;
+	MAT4 transformMatrix;
+
 
 };
 

@@ -35,9 +35,9 @@ Component* GameObject::getComponent(COMPONENT_TYPE c)
 
 void GameObject::Update()
 {
-	for (auto i = components.begin(); i!= components.end();i++)
+	for (int i=0;i<components.size();i++)
 	{
-		(*i)->Update();
+		components.at(i)->Update();
 	}
 }
 

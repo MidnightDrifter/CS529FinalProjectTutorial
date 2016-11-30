@@ -23,6 +23,8 @@
 #include "CollisionManager.h"
 #include "EventManager.h"
 #include <Windows.h>
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
 //#pragma comment (lib, "glew32.lib")
 //#pragma comment (lib, "glfw3.lib")
 //# define GL3_PROTOTYPES 1
@@ -67,8 +69,32 @@ void LoadShaders(void)
 
 	//Vertetx shader
 
-	const char * vertexShaderCode = "uniform mat4 transform;  attribute vec4 aPosition;  attribute vec4 aColor;  varying vec4 vColor;  void main() {vec4 worldPos = transform * aPosition;  vColor = aColor;  gl_Position = worldPos;}";
-	const char* fragmentShaderCode = "varying vec4 vColor;  void main() {gl_FragColor = vColor;} ";
+	const char * vertexShaderCode = "//uniform mat4 transform;					\
+									 attribute vec4 aPosition;					\
+									 attribute vec4 aColor;						\
+								//	attribute vec2 aTextureCoordinates;			\
+								//	varying vec2 vTextureCoordinates;			\
+									  varying vec4 vColor;						\
+									  void main()								\
+									{											\
+									//vec4 worldPos = transform * aPosition;		\
+									vColor = aColor;							\
+									//vTextureCoordinates = aTextureCoordinates;	\
+								    gl_Position = aPosition;						\
+									}";
+
+
+
+
+	const char* fragmentShaderCode = "	varying vec4 vColor;												\
+									//	varying vec2 vTextureCoordinates;									\
+									//	uniform sampler2D testTexture;										\
+									  void main()															\
+									 {																		\
+									gl_FragColor = vColor;													\
+									gl_FragColor.r = 1.0; \
+								//	glFragColor.xyz = texture2D(testTexture,vTextureCoordinates).xyz;		\
+									} ";
 
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShaderID,1, &vertexShaderCode, NULL);
@@ -291,20 +317,23 @@ int main(int argc, char* argv[])
 		LoadShaders();
 
 
-		GLuint bufferPosition, bufferColors;
+		GLuint bufferPosition, bufferColors, bufferTexture;
 		glGenBuffers(1, &bufferPosition);  //Position buffer
 		glGenBuffers(1, &bufferColors);  //Color buffer
+		glGenBuffers(1, &bufferTexture);
 
 		int vertexNum = 3;   //Number of vertices
 		int coordsPerPosition = 3;    // (x,y,z)
 		int colorsPerPosition = 4;   //4 vals per color, RGBA
+		int coordsPerTextureCoord = 2;
 
 		int posBufferSize = vertexNum * coordsPerPosition * sizeof(GLfloat);
 		int colorBufferSize = vertexNum * colorsPerPosition * sizeof(GLfloat);
+		int textureCoordBufferSize = vertexNum * coordsPerTextureCoord * sizeof(GLfloat);  // ????
 
 		GLfloat* pPosition = new GLfloat[vertexNum * coordsPerPosition];
 		GLfloat* pColor = new GLfloat[vertexNum * colorsPerPosition];
-
+		GLfloat* pTextureCoords = new GLfloat[vertexNum * coordsPerTextureCoord];
 
 
 		//glVertex2f(-0.5f, -0.5f);  glColor3f(1.0f, 0.0f, 0.f);  //Vertex pos, vertex color -- colors are normalized from 0-1
@@ -314,13 +343,21 @@ int main(int argc, char* argv[])
 
 		pPosition[0] = -0.5f;  pPosition[1] = -0.5f;  pPosition[2] = 0.f;   //Vertex 1  (-.5, -.5, 0)
 		pColor[0] = 1.f;  pColor[1] = 0.f;  pColor[2] = 0.f;  pColor[3] = 1.f;
+		pTextureCoords[0] = 0.f;  pTextureCoords[1] = 1.f;
+
+
 
 		pPosition[3] = 0.5f;  pPosition[4] = -0.5f;  pPosition[5] = 0.f;   //Vertex 2  (.5, -.5, 0)
 		pColor[4] = 0.f;  pColor[5] = 1.f;  pColor[6] = 0.f;  pColor[7] = 1.f;
-
+		pTextureCoords[2] = 1.f;  pTextureCoords[3] = 1.f;
 
 		pPosition[6] = 0.5f;  pPosition[7] = 0.5f;  pPosition[8] = 0.f;   //Vertex 3  (.5, .5, 0)
 		pColor[8] = 0.f;  pColor[9] = 0.f;  pColor[10] =1.f;  pColor[11] = 1.f;
+		pTextureCoords[4] = 0.5f; pTextureCoords[5] = 0.f;
+		//Drawing a triangle--texture is square, points of triangle at: bot left, bot right, top middle
+		//Tex coords normalized so coords are:  (0,1) (1,1), (0.5,0)
+
+
 
 		//Pass position buffer to OpenGL, graphics card
 		glBindBuffer(GL_ARRAY_BUFFER, bufferPosition);   //Specify buffer
@@ -331,11 +368,17 @@ int main(int argc, char* argv[])
 		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, pColor, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
 		glBindBuffer(GL_ARRAY_BUFFER, 0);   //Clear what buffer you're bound to
 
+		//glBindBuffer(GL_ARRAY_BUFFER, bufferTexture );
+		//glBufferData(GL_ARRAY_BUFFER, textureCoordBufferSize, pTextureCoords, GL_STATIC_DRAW);
+		//glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+
 		glFinish();  //Have everything wait until the drawing is done
 
 //Get rid of buffers, send to graphics card already!
 		delete[] pPosition;
 		delete[] pColor;
+		delete[] pTextureCoords;
 
 		//winSurface = SDL_GetWindowSurface(window);
 		/*
@@ -378,6 +421,35 @@ int main(int argc, char* argv[])
 
 						//Fill window with color--in this case, black
 		//	int i = 0;
+
+
+		//Generating texture(s)
+
+/*
+		ULONG_PTR mGdiPlusToken;
+		Gdiplus::GdiplusStartupInput d;
+		Gdiplus::GdiplusStartup(&mGdiPlusToken, &d,NULL);
+
+		GLuint texID;
+		Gdiplus::Bitmap bmp(L"Resources//ship.bmp");  //May need to remove the 'L'
+		Gdiplus::Rect rect(0, 0, bmp.GetWidth(), bmp.GetHeight());
+		Gdiplus::BitmapData data;
+		bmp.LockBits(&rect, Gdiplus::ImageLockModeRead, PixelFormat32bppARGB, &data);
+		glGenTextures(1, &texID);
+
+		//Generated texture
+
+		//Bind created texture
+		glBindTexture(GL_TEXTURE_2D, texID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, data.Width, data.Height,0,GL_BGRA_EXT,GL_UNSIGNED_BYTE, data.Scan0 );
+
+			bmp.UnlockBits(&data);
+
+*/
+
 			bool isRunning = true;
 			int testing = 0;
 
@@ -539,25 +611,41 @@ int main(int argc, char* argv[])
 				*/
 
 
-				int posHandle, colorHandle, matrixHandle;
+				int posHandle, colorHandle, matrixHandle, textureHandle, texCoordHandle;
 				posHandle = glGetAttribLocation(globalShaderID, "aPosition");
 				glEnableVertexAttribArray(posHandle);
 				glBindBuffer(GL_ARRAY_BUFFER, bufferPosition);
 				glVertexAttribPointer(posHandle, coordsPerPosition,GL_FLOAT,false,0,NULL);
-
+							
 				colorHandle = glGetAttribLocation(globalShaderID, "aColor");
 				glEnableVertexAttribArray(colorHandle);
 				glBindBuffer(GL_ARRAY_BUFFER, bufferColors);
 				glVertexAttribPointer(colorHandle, colorsPerPosition, GL_FLOAT, false, 0, NULL);
-
+				
 				matrixHandle = glGetUniformLocation(globalShaderID, "transform");
 				GLfloat mat[4][4] = { 0 };
 				mat[0][0] = mat[1][1] = mat[2][2] = mat[3][3] = 1.f;
-				glUniformMatrix4fv( matrixHandle, 1, false, mat[0]);
+				glUniformMatrix4fv( matrixHandle, 1, false, (const GLfloat *)mat);
+				/*
+				texCoordHandle = glGetAttribLocation(globalShaderID, "aTextureCoordinates");
+				glEnableVertexAttribArray(texCoordHandle);
+				glBindBuffer(GL_ARRAY_BUFFER, bufferTexture);
+				glVertexAttribPointer(texCoordHandle, coordsPerTextureCoord, GL_FLOAT, false, 0, 0);
+
+
+				textureHandle = glGetUniformLocation(globalShaderID, "testTexture");
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, texID);
+				glUniform1i(textureHandle, 0);
+				*/
+
+
 
 				glDrawArrays(GL_TRIANGLES, 0, vertexNum);
 
-
+			//	glDisableVertexAttribArray(texCoordHandle);
+				glDisableVertexAttribArray(posHandle);
+				glDisableVertexAttribArray(colorHandle);
 
 				SDL_GL_SwapWindow(window);  //Update the window
 				framerateController.FrameEnd();
@@ -572,7 +660,7 @@ int main(int argc, char* argv[])
 			//	SDL_FreeSurface(ppImage[i]);
 		//	}
 
-
+			//Gdiplus::GdiplusShutdown(mGdiPlusToken);
 			SDL_GL_DeleteContext(context);
 		//	SDL_FreeSurface(winSurface);
 		//	SDL_GL_DeleteContext(context);

@@ -23,7 +23,7 @@ Controller::~Controller()
 
 void Controller::Update()
 {
-	//if left key pressed
+	//if left key Triggered
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(300.f);
@@ -44,44 +44,49 @@ void Controller::Update()
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (300.f);
 	}
 	
+
+	static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY *= 0.9;
+	static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX *= 0.9;
 	/*
 	
 	
-		//if left key pressed
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
+		//if left key Triggered
+	if (InputMgr.isKeyTriggered(SDL_SCANCODE_LEFT))
 	{
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(3.f);
 		//Rotate left
 
 	}
 
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
+	if (InputMgr.isKeyTriggered(SDL_SCANCODE_RIGHT))
 	{
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (3.f);
 		//Rotate right
 	}
 
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
+	if (InputMgr.isKeyTriggered(SDL_SCANCODE_DOWN))
 	{
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (3.f);
 		//Backward accel
 	}
 
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
+	if (InputMgr.isKeyTriggered(SDL_SCANCODE_UP))
 	{
 		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (3.f);
 		//Forward accel
 	}
 	*/
-	if(InputMgr.isKeyPressed(SDL_SCANCODE_SPACE))
+	if(InputMgr.isKeyTriggered(SDL_SCANCODE_SPACE))
 	{
-		GameObject* bullet = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::BULLET);
-
+ 		GameObject* bullet = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::BULLET);
 		Body* b = static_cast<Body*>(bullet->getComponent(COMPONENT_TYPE::BODY));
+		Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
 		//Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
 		
-		//b->currPosX = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosX);
-		//b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
+		b->currPosX = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosX);
+		b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
+		t->setX(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getX());
+		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
 		//b->velX = 1.f;   //Add rotation calculations here, scale by BULLET_SPEED
 		//b->velY = 1.f;
 
@@ -102,18 +107,45 @@ void Controller::handleEvent(Event* e)
 	if (e->eType == EVENT_TYPE::COLLISION)
 	{
 		CollisionEvent* cEvent = static_cast<CollisionEvent*>(e);
+
 		Body* b = static_cast<Body*>(owner->getComponent(COMPONENT_TYPE::BODY));
 
-		if (NULL != b)
+		GameObject* otherCollider = NULL;
+
+		if ( this->owner == cEvent->pObject1)
 		{
-			//If something with a controller component collides with something, reset its position
-			b->currPosX = 0;
-			b->currPosY = 0;
+			otherCollider = cEvent->pObject2;
 		}
 
+		else
+		{
+			otherCollider = cEvent->pObject1;
+		}
+
+
+		if (NULL != b && otherCollider != NULL && (otherCollider->getType() == GAME_OBJECT_TYPE::ALIEN || otherCollider->getType() == GAME_OBJECT_TYPE::ASTEROID))
+		{
+			//If something with a controller component collides with something, reset its position
+		//	b->currPosX = 0;
+		//	b->currPosY = 0;
+
+			//Reset the controller object--this object--destroy the enemy object
+			delete otherCollider;  //Destroy it through the game object manager instead??
+			
+			b->currPosX = 100.f;  //Some starting position
+			b->currPosY = 100.f; 
+
+			//Don't need player hit event, collision works just fine
+		
+	
+		
+		}
+		/*
 		//Timer of 2s
 		PlayerHitEvent* phe = new PlayerHitEvent();
 		phe->timer = 2;
 		EventMgr.AddEvent(phe);
+	*/
+	
 	}
 }
