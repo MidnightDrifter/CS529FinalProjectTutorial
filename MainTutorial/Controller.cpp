@@ -81,6 +81,7 @@ void Controller::Update()
  		GameObject* bullet = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::BULLET);
 		Body* b = static_cast<Body*>(bullet->getComponent(COMPONENT_TYPE::BODY));
 		Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
+		
 		//Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
 		
 		b->currPosX = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosX);
@@ -132,8 +133,8 @@ void Controller::handleEvent(Event* e)
 			//Reset the controller object--this object--destroy the enemy object
 			delete otherCollider;  //Destroy it through the game object manager instead??
 			
-			b->currPosX = 100.f;  //Some starting position
-			b->currPosY = 100.f; 
+			b->currPosX = 0.5f;  //Some starting position
+			b->currPosY = 0.5f; 
 
 			//Don't need player hit event, collision works just fine
 		

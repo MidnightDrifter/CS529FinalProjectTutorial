@@ -1,8 +1,10 @@
 Input Txt File Layout
 Transform
-xPos yPos
+xPos yPos xScale yScale startingRotation
 Sprite
-filename
+Red color val Blue Green Alpha
+number of vertices
+vertex vals (normalized, 0-1, total # should be num vertices *3, every 3rd one should be 0)
 Controller  //If applicable
 AI thing //If applicable
 AI data

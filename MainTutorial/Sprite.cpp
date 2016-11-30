@@ -1,6 +1,36 @@
 #include "Sprite.h"
 
 
+Sprite::Sprite() : Component(COMPONENT_TYPE::SPRITE)
+{
+	
+		for (int i = 0; i < 12; i++)
+		{
+			vertices[i] = 0;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			colorHolder[i] = 0;
+		}
+
+		for (int i = 0; i < 16; i++)
+		{
+			colors[i] = 0;
+		}
+
+
+
+}
+
+Sprite::~Sprite()
+{
+	delete[] vertices;
+	delete[] colors;
+	delete[] colorHolder;
+}
+
+/*
 GLuint Sprite::getArrayBufferID() const
 {
 	return arrayBufferID;
@@ -91,4 +121,45 @@ Sprite::~Sprite()
 	arrayBufferID = -1;
 	isSquare = false;
 }
+*/
 
+void Sprite::Serialize(FILE** fpp)
+{
+	fscanf(*fpp, "%f %f %f %f\n", &colorHolder[0], &colorHolder[1], &colorHolder[2], &colorHolder[3]);
+	fscanf(*fpp, "%i\n", &numVertices);
+
+	//vertices = new GLfloat(3 * numVertices);
+
+		fscanf(*fpp, "%f %f %f %f %f %f %f %f %f %f %f %f\n", &vertices[0], &vertices[1], &vertices[2], &vertices[3], &vertices[4], &vertices[5], &vertices[6], &vertices[7], &vertices[8], &vertices[9],&vertices[10],&vertices[11]);
+	
+}
+
+
+void Sprite::GenerateBuffers()
+{
+	//colors[0] = colors[3] = colors[6] = colorHolder[0];
+	colors[0] = colors[4] = colors[8] = colors[12]=colorHolder[0];
+	colors[1] = colors[5] = colors[9] = colors[13] = colorHolder[1];
+	colors[2] = colors[6] = colors[10] = colors[14] = colorHolder[2];
+		colors[3] = colors[7] = colors[11] = colors[15] = colorHolder[3];
+	glGenBuffers(1, &posBuffID);  //Position buffer
+	glGenBuffers(1, &colorBuffID);  //Color buffer
+
+	int vertexNum = 3;   //Number of vertices
+	int coordsPerPosition = 3;    // (x,y,z)
+	int colorsPerPosition = 4;   //4 vals per color, RGBA
+
+	int posBufferSize = vertexNum * coordsPerPosition * sizeof(GLfloat);
+	int colorBufferSize = vertexNum * colorsPerPosition * sizeof(GLfloat);
+
+
+	//Pass position buffer to OpenGL, graphics card
+	glBindBuffer(GL_ARRAY_BUFFER, posBuffID);   //Specify buffer
+	glBufferData(GL_ARRAY_BUFFER, posBufferSize, vertices, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
+	glBindBuffer(GL_ARRAY_BUFFER, 0);  //Clear what buffer you're bound to
+
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffID);  //Pass color buffer to OpenGl, graphics card
+	glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
+	glBindBuffer(GL_ARRAY_BUFFER, 0);   //Clear what buffer you're bound to
+
+}

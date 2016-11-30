@@ -1,8 +1,0 @@
-Transform
-100.0 100.0
-Sprite
-Bullet.bmp
-Body
-1.0
-AABB
--0.5, 0.5, 0.5, -0.5

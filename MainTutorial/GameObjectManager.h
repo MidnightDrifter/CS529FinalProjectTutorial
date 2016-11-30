@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "SpriteBasic.h"
+#include "Sprite.h"
 #include "Body.h"
 #include "Transform.h"
 #include "Controller.h"

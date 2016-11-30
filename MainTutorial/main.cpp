@@ -289,7 +289,7 @@ int main(int argc, char* argv[])
 		{ return false; }
 
 		LoadShaders();
-
+		/*
 
 		GLuint bufferPosition, bufferColors;
 		glGenBuffers(1, &bufferPosition);  //Position buffer
@@ -384,6 +384,10 @@ int main(int argc, char* argv[])
 
 			GameObject* startingObject = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
+			Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
+
+
+
 			while (isRunning)
 			{
 				framerateController.FrameStart();
@@ -474,25 +478,52 @@ int main(int argc, char* argv[])
 
 				// 512 x 365
 
-
+				int vertexNum = 3;   //Number of vertices
+				int coordsPerPosition = 3;    // (x,y,z)
+				int colorsPerPosition = 4;   //4 vals per color, RGBA
 
 				for (GameObject* g : GameObjMgr.objects)
 				{
-					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
+					//SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+					Sprite* s = (Sprite*)g->getComponent(COMPONENT_TYPE::SPRITE);
 					if (t != NULL && s != NULL)
 					{
-						SDL_Rect destRect;
-						destRect.x = t->getX();
-						destRect.y = t->getY();
-						destRect.w = 512;
-						destRect.h = 365;
+						//SDL_Rect destRect;
+						//destRect.x = t->getX();
+						//destRect.y = t->getY();
+						//destRect.w = 512;
+						//destRect.h = 365;
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
 
 						//SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
+
+						s->GenerateBuffers();
+
+						int posHandle, colorHandle, matrixHandle;
+						posHandle = glGetAttribLocation(globalShaderID, "aPosition");
+						glEnableVertexAttribArray(posHandle);
+						glBindBuffer(GL_ARRAY_BUFFER, s->posBuffID);
+						glVertexAttribPointer(posHandle, coordsPerPosition, GL_FLOAT, false, 0, NULL);
+
+						colorHandle = glGetAttribLocation(globalShaderID, "aColor");
+						glEnableVertexAttribArray(colorHandle);
+						glBindBuffer(GL_ARRAY_BUFFER, s->colorBuffID);
+						glVertexAttribPointer(colorHandle, colorsPerPosition, GL_FLOAT, false, 0, NULL);
+
+						matrixHandle = glGetUniformLocation(globalShaderID, "transform");
+
+						glUniformMatrix4fv(matrixHandle, 1, false, t->transformMatrix[0]);
+
+
+
+
+						glDrawArrays(GL_TRIANGLES, 0, vertexNum);
 					}
+
+
 					
 				}
 				//SDL_UpdateWindowSurface(window);
@@ -536,7 +567,7 @@ int main(int argc, char* argv[])
 
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState( GL_COLOR_ARRAY);
-				*/
+				
 
 
 				int posHandle, colorHandle, matrixHandle;
@@ -555,8 +586,11 @@ int main(int argc, char* argv[])
 				mat[0][0] = mat[1][1] = mat[2][2] = mat[3][3] = 1.f;
 				glUniformMatrix4fv( matrixHandle, 1, false, mat[0]);
 
-				glDrawArrays(GL_TRIANGLES, 0, vertexNum);
 
+
+
+				glDrawArrays(GL_TRIANGLES, 0, vertexNum);
+				*/
 
 
 				SDL_GL_SwapWindow(window);  //Update the window

@@ -101,7 +101,8 @@ GameObject* GameObjectManager::LoadObject(const char *pFilename)
 
 		else if (0 == strcmp("Sprite", name))
 		{
-			SpriteBasic* t = new SpriteBasic();
+			//SpriteBasic* t = new SpriteBasic();
+			Sprite* t = new Sprite();
 			t->Serialize(&fp);
 			obj->addComponent(t);
 		}

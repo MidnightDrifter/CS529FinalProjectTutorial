@@ -319,6 +319,11 @@
     <Text Include="Player.txt" />
     <Text Include="TestSerializerPlayerChar.txt" />
     <Text Include="Text File Layout Example.txt" />
+    <Text Include="TextFiles\Alien.txt" />
+    <Text Include="TextFiles\Asteroid.txt" />
+    <Text Include="TextFiles\Bullet.txt" />
+    <Text Include="TextFiles\HomingMissile.txt" />
+    <Text Include="TextFiles\Player.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

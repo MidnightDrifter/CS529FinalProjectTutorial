@@ -380,9 +380,6 @@
     <ClInclude Include="SpriteComplex.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Body.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -404,11 +401,14 @@
     <ClInclude Include="EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="transformMAT4.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -528,6 +528,21 @@
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
     <Text Include="HomingMissile.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Alien.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Asteroid.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Bullet.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\HomingMissile.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Player.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
   </ItemGroup>
