@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include "Component.h"
-
+#include "Transform.h"
 //#include "shader.h"
 #pragma comment (lib, "glew32.lib")
 class Sprite : public Component
@@ -13,7 +13,8 @@ public:
 	~Sprite(); // { delete[] vertices;  delete[] colors;  delete[] colorHolder; }
 	void Update() {}
 	void Serialize(FILE** fpp);
-	void GenerateBuffers();
+	//void GenerateBuffers();
+	void Draw(GLuint shaderID);
 	/*
 	const GLfloat square[4][3]
 	{

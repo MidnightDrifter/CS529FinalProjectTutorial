@@ -512,22 +512,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestSerializerPlayerChar.txt" />
-    <Text Include="Player.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
     <Text Include="Text File Layout Example.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
-    <Text Include="Alien.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
-    <Text Include="Asteroid.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
-    <Text Include="Bullet.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
-    <Text Include="HomingMissile.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
     <Text Include="TextFiles\Alien.txt">

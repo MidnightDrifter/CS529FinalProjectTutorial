@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include "GameObject.h"
 
 Sprite::Sprite() : Component(COMPONENT_TYPE::SPRITE)
 {
@@ -135,7 +135,7 @@ void Sprite::Serialize(FILE** fpp)
 }
 
 
-void Sprite::GenerateBuffers()
+void Sprite::Draw(GLuint globalShaderID)
 {
 	//colors[0] = colors[3] = colors[6] = colorHolder[0];
 	colors[0] = colors[4] = colors[8] = colors[12]=colorHolder[0];
@@ -152,6 +152,7 @@ void Sprite::GenerateBuffers()
 	int posBufferSize = vertexNum * coordsPerPosition * sizeof(GLfloat);
 	int colorBufferSize = vertexNum * colorsPerPosition * sizeof(GLfloat);
 
+	MAT4 t = static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->transformMatrix;
 
 	//Pass position buffer to OpenGL, graphics card
 	glBindBuffer(GL_ARRAY_BUFFER, posBuffID);   //Specify buffer
@@ -162,4 +163,27 @@ void Sprite::GenerateBuffers()
 	glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
 	glBindBuffer(GL_ARRAY_BUFFER, 0);   //Clear what buffer you're bound to
 
+
+
+	glFinish();
+	int posHandle, colorHandle, matrixHandle;
+	posHandle = glGetAttribLocation(globalShaderID, "aPosition");
+	glEnableVertexAttribArray(posHandle);
+	glBindBuffer(GL_ARRAY_BUFFER, posBuffID);
+	glVertexAttribPointer(posHandle, coordsPerPosition, GL_FLOAT, false, 0, NULL);
+
+	colorHandle = glGetAttribLocation(globalShaderID, "aColor");
+	glEnableVertexAttribArray(colorHandle);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffID);
+	glVertexAttribPointer(colorHandle, colorsPerPosition, GL_FLOAT, false, 0, NULL);
+
+	matrixHandle = glGetUniformLocation(globalShaderID, "transform");
+
+	glUniformMatrix4fv(matrixHandle, 1, true, t.Pntr());
+
+
+
+
+	glDrawArrays(GL_TRIANGLES, 0, vertexNum);
+	
 }

@@ -312,11 +312,6 @@
     <Image Include="Resources\dark_pursuit_small_right.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Alien.txt" />
-    <Text Include="Asteroid.txt" />
-    <Text Include="Bullet.txt" />
-    <Text Include="HomingMissile.txt" />
-    <Text Include="Player.txt" />
     <Text Include="TestSerializerPlayerChar.txt" />
     <Text Include="Text File Layout Example.txt" />
     <Text Include="TextFiles\Alien.txt" />

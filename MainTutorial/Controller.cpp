@@ -23,25 +23,29 @@ Controller::~Controller()
 
 void Controller::Update()
 {
+	float SHIP_ACCELERATION = 300.f;
 	//if left key Triggered
+	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
+
+
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX-=(300.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX-=(SHIP_ACCELERATION * cosf(t->getRotation()));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velX += (300.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation()));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY += (300.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->velY -= (300.f);
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
 	}
 	
 
@@ -88,8 +92,25 @@ void Controller::Update()
 		b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
 		t->setX(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getX());
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
+		
 		//b->velX = 1.f;   //Add rotation calculations here, scale by BULLET_SPEED
 		//b->velY = 1.f;
+
+	}
+
+	if (InputMgr.isKeyTriggered(SDL_SCANCODE_M))
+	{
+		GameObject* missile = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::MISSILE);
+			Body* b = static_cast<Body*>(missile->getComponent(COMPONENT_TYPE::BODY));
+		Transform* t = static_cast<Transform*>(missile->getComponent(COMPONENT_TYPE::TRANSFORM));
+
+		//Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
+
+		b->currPosX = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosX);
+		b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
+		t->setX(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getX());
+		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
+		t->setRotation(static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
 
 	}
 	

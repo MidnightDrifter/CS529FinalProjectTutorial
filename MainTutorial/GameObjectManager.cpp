@@ -65,6 +65,12 @@ GameObject* GameObjectManager::spawnObject(GAME_OBJECT_TYPE g)
 		obj = LoadObject("TextFiles\\Alien.txt");
 		obj->setType(GAME_OBJECT_TYPE::ALIEN);
 	}
+
+	else if (g == GAME_OBJECT_TYPE::MISSILE)
+	{
+		obj = LoadObject("TextFiles\\HomingMissile.txt");
+		obj->setType(GAME_OBJECT_TYPE::MISSILE);
+	}
 	if (obj)
 	{
 		objects.push_back(obj);

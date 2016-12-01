@@ -12,7 +12,9 @@ enum class GAME_OBJECT_TYPE
 	ASTEROID,
 	BULLET,
 	ALIEN,
-	NULLTYPE
+	MISSILE,
+	NULLTYPE,
+	NUM
 };
 
 class GameObject

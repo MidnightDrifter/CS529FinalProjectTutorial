@@ -56,7 +56,7 @@ EventManager& EventMgr = EventManager();
 //SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 GLint globalShaderID;
-
+GameObject* player;
 
 void LoadShaders(void)
 {
@@ -382,9 +382,9 @@ int main(int argc, char* argv[])
 			int testing = 0;
 
 
-			GameObject* startingObject = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
+			player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
-			Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
+		//	Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
 
 
 
@@ -500,27 +500,8 @@ int main(int argc, char* argv[])
 
 						//SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
 
-						s->GenerateBuffers();
-
-						int posHandle, colorHandle, matrixHandle;
-						posHandle = glGetAttribLocation(globalShaderID, "aPosition");
-						glEnableVertexAttribArray(posHandle);
-						glBindBuffer(GL_ARRAY_BUFFER, s->posBuffID);
-						glVertexAttribPointer(posHandle, coordsPerPosition, GL_FLOAT, false, 0, NULL);
-
-						colorHandle = glGetAttribLocation(globalShaderID, "aColor");
-						glEnableVertexAttribArray(colorHandle);
-						glBindBuffer(GL_ARRAY_BUFFER, s->colorBuffID);
-						glVertexAttribPointer(colorHandle, colorsPerPosition, GL_FLOAT, false, 0, NULL);
-
-						matrixHandle = glGetUniformLocation(globalShaderID, "transform");
-
-						glUniformMatrix4fv(matrixHandle, 1, false, t->transformMatrix[0]);
-
-
-
-
-						glDrawArrays(GL_TRIANGLES, 0, vertexNum);
+						//s->GenerateBuffers();
+						s->Draw(globalShaderID);
 					}
 
 

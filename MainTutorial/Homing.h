@@ -7,7 +7,7 @@ public:
 	Homing() : target(NULL), Component(COMPONENT_TYPE::HOMING) {}
 	Homing(GameObject* g) : target(g), Component(COMPONENT_TYPE::HOMING){}
 	void Serialize(FILE** fp) {}
-	void Update();
+	void Update() {}
 	~Homing();
 
 
