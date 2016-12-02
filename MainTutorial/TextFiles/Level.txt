@@ -1,0 +1,7 @@
+Player.txt
+Asteroid.txt
+175.0  25.0
+Asteroid.txt
+500.0   240.0
+Asteroid.txt 55.0  450.0
+Alien.txt 1.0 1.0

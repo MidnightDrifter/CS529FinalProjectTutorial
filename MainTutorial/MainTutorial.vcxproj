@@ -315,10 +315,15 @@
     <Text Include="TestSerializerPlayerChar.txt" />
     <Text Include="Text File Layout Example.txt" />
     <Text Include="TextFiles\Alien.txt" />
+    <Text Include="TextFiles\AlienSDLVer.txt" />
     <Text Include="TextFiles\Asteroid.txt" />
+    <Text Include="TextFiles\AsteroidSDLVer.txt" />
     <Text Include="TextFiles\Bullet.txt" />
+    <Text Include="TextFiles\BulletSDLVer.txt" />
     <Text Include="TextFiles\HomingMissile.txt" />
+    <Text Include="TextFiles\HomingMissileSDLVer.txt" />
     <Text Include="TextFiles\Player.txt" />
+    <Text Include="TextFiles\PlayerSDLVer.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
