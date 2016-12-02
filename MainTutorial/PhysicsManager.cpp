@@ -115,42 +115,46 @@ void PhysicsManager::Integrate(float deltaTime)
 
 					}
 				}
-				Transform* targetTransform = static_cast<Transform*>(h->target->getComponent(COMPONENT_TYPE::TRANSFORM));
-				Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
-				Vector2D myVel, normal, targetVec, out;
-				Vector2DSet(&myVel, pBody->velX, pBody->velY);
-				Vector2DSet(&normal, myVel.y * -1, myVel.x);
-				Vector2DSet(&targetVec, targetTransform->getX() - t->getX(), targetTransform->getY() - t->getY());
 
-				float angle = (myVel.x * targetVec.x + myVel.y*targetVec.y) / (Vector2DLength(&myVel) * Vector2DLength(&targetVec));
-				float a = std::min(MAX_HOMING_ROTATION_SPEED * framerateController.getFrameTime(), acosf(angle));
-
-				if (normal.x * targetVec.x + normal.y * targetVec.y < 0)
+				if (h != NULL)
 				{
-					a = -a;
+					Transform* targetTransform = static_cast<Transform*>(h->target->getComponent(COMPONENT_TYPE::TRANSFORM));
+					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+					Vector2D myVel, normal, targetVec, out;
+					Vector2DSet(&myVel, pBody->velX, pBody->velY);
+					Vector2DSet(&normal, myVel.y * -1, myVel.x);
+					Vector2DSet(&targetVec, targetTransform->getX() - t->getX(), targetTransform->getY() - t->getY());
+
+					float angle = (myVel.x * targetVec.x + myVel.y*targetVec.y) / (Vector2DLength(&myVel) * Vector2DLength(&targetVec));
+					float a = std::min(MAX_HOMING_ROTATION_SPEED * framerateController.getFrameTime(), acosf(angle));
+
+					if (normal.x * targetVec.x + normal.y * targetVec.y < 0)
+					{
+						a = -a;
+					}
+
+					float curAngle = t->getRotation();
+					Vector2DSet(&out, pBody->velX, pBody->velY);
+					Vector2DNormalize(&out, &out);
+					float scale = 1.f;
+					if (g->getType() == GAME_OBJECT_TYPE::MISSILE)
+					{
+						scale = MISSILE_SPEED;
+					}
+
+					else if (g->getType() == GAME_OBJECT_TYPE::ALIEN)
+					{
+						scale = MISSILE_SPEED;
+						scale /= 2.f;
+
+					}
+
+					Vector2DScale(&out, &out, scale);
+
+					pBody->velX = out.x;
+					pBody->velY = out.y;
+
 				}
-
-				float curAngle = t->getRotation();
-				Vector2DSet(&out, pBody->velX, pBody->velY);
-				Vector2DNormalize(&out, &out);
-				float scale = 1.f;
-				if (g->getType() == GAME_OBJECT_TYPE::MISSILE)
-				{
-					scale = MISSILE_SPEED;
-				}
-
-				else if (g->getType() == GAME_OBJECT_TYPE::ALIEN)
-				{
-					scale = MISSILE_SPEED;
-					scale /= 2.f;
-
-				}
-
-				Vector2DScale(&out, &out, scale);
-
-				pBody->velX = out.x;
-				pBody->velY = out.y;
-			
 			}
 
 		}

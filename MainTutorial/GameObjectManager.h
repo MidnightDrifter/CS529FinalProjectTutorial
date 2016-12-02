@@ -16,6 +16,7 @@ public:
 	GameObject* spawnObject(GAME_OBJECT_TYPE g);
 	GameObject* LoadObject(const char* c);
 
+	void LoadLevel(const char* c);
 
 	std::vector<GameObject*> objects;
 

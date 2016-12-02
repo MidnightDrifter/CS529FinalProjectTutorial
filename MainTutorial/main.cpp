@@ -44,8 +44,8 @@ int test;
 //Shader shader;
 SDL_Window* window;
 SDL_Surface* surface;
-//SDL_Surface* winSurface;
-SDL_GLContext context;
+SDL_Surface* winSurface;
+//SDL_GLContext context;
 InputManager& InputMgr = InputManager();
 FramerateController& framerateController = FramerateController(30);
 ResourceManager& ResourceMgr = ResourceManager();
@@ -55,8 +55,10 @@ CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
 //SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-GLint globalShaderID;
 GameObject* player;
+
+/*
+GLint globalShaderID;
 
 void LoadShaders(void)
 {
@@ -100,7 +102,7 @@ void LoadShaders(void)
 
 
 
-
+*/
 
 
 
@@ -260,8 +262,8 @@ int main(int argc, char* argv[])
 	{
 		//return 0;
 		//printf
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+	//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
 
 
 		window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -274,8 +276,8 @@ int main(int argc, char* argv[])
 			//CheckSDLError(__LINE__);
 			return false;
 		}
-		
-		context = SDL_GL_CreateContext(window);
+		/*
+		//context = SDL_GL_CreateContext(window);
 		
 		if (glewInit() != GLEW_OK)
 		{
@@ -289,7 +291,7 @@ int main(int argc, char* argv[])
 		{ return false; }
 
 		LoadShaders();
-		/*
+		
 
 		GLuint bufferPosition, bufferColors;
 		glGenBuffers(1, &bufferPosition);  //Position buffer
@@ -473,7 +475,7 @@ int main(int argc, char* argv[])
 
 
 
-//				SDL_FillRect(winSurface, NULL, 0);
+				SDL_FillRect(winSurface, NULL, 0);
 				
 
 				// 512 x 365
@@ -484,32 +486,32 @@ int main(int argc, char* argv[])
 
 				for (GameObject* g : GameObjMgr.objects)
 				{
-					//SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
+					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
-					Sprite* s = (Sprite*)g->getComponent(COMPONENT_TYPE::SPRITE);
+				//	Sprite* s = (Sprite*)g->getComponent(COMPONENT_TYPE::SPRITE);
 					if (t != NULL && s != NULL)
 					{
-						//SDL_Rect destRect;
-						//destRect.x = t->getX();
-						//destRect.y = t->getY();
-						//destRect.w = 512;
-						//destRect.h = 365;
+						SDL_Rect destRect;
+						destRect.x = t->getX();
+						destRect.y = t->getY();
+						destRect.w = 512;
+						destRect.h = 365;
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
 
-						//SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
+						SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
 
 						//s->GenerateBuffers();
-						s->Draw(globalShaderID);
+					//	s->Draw(globalShaderID);
 					}
 
 
 					
 				}
-				//SDL_UpdateWindowSurface(window);
-				glClearColor(0.f, 1.f, 1.f, 0.f);  //Default background color
-				glClear(GL_COLOR_BUFFER_BIT);  //Clear framebuffer
+				SDL_UpdateWindowSurface(window);
+				//glClearColor(0.f, 1.f, 1.f, 0.f);  //Default background color
+				//glClear(GL_COLOR_BUFFER_BIT);  //Clear framebuffer
 
 
 
@@ -588,8 +590,8 @@ int main(int argc, char* argv[])
 		//	}
 
 
-			SDL_GL_DeleteContext(context);
-		//	SDL_FreeSurface(winSurface);
+		//	SDL_GL_DeleteContext(context);
+			SDL_FreeSurface(winSurface);
 		//	SDL_GL_DeleteContext(context);
 
 			// Destroy our window

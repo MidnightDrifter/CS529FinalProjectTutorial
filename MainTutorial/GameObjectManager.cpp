@@ -26,6 +26,55 @@ void GameObjectManager::Update()
 }
 
 
+void GameObjectManager::LoadLevel(const char* s)
+{
+	GameObject* obj = NULL;
+	FILE* fp;
+	errno_t err = fopen_s(&fp,s, "r");
+	if (err)
+	{
+		printf("Error opening file, terminating.\n");
+		exit(-1);
+	}
+	char c[100];
+	while (!feof(fp))
+	{
+		memset(c, 0, sizeof(char) * 100);
+		fscanf(fp, "%s\n", c);
+
+
+		if (strcmp(c, "Bullet.txt"))
+		{
+			obj = LoadObject("TextFiles\\Bullet.txt");
+			obj->setType(GAME_OBJECT_TYPE::BULLET);
+		}
+
+		else if (strcmp(c, "Alien.txt"))
+		{
+			obj = LoadObject("TextFiles\\Alien.txt");
+			obj->setType(GAME_OBJECT_TYPE::ALIEN);
+
+		}
+
+		else if (strcmp(c, "Player.txt"))
+		{
+			obj = LoadObject("TextFiles\\Player.txt");
+			obj->setType(GAME_OBJECT_TYPE::PLAYER);
+		}
+
+		else if (strcmp(c, "Transform") && obj != NULL)
+		{
+			float x, y;
+			fscanf(fp,"%f %f\n", &x, &y);
+			Transform* t = static_cast<Transform*>(obj->getComponent(COMPONENT_TYPE::TRANSFORM));
+			t->setX(x);
+			t->setY(y);
+			
+		}
+	}
+	fclose(fp);
+}
+
 GameObject* GameObjectManager::spawnObject(GAME_OBJECT_TYPE g)
 {
 	GameObject* obj = NULL;// new GameObject();
