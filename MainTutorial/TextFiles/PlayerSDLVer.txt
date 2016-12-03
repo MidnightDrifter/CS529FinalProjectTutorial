@@ -1,5 +1,5 @@
 Transform
-0.5 0.5 1.0 1.0 0.0
+350.0 305.0 1.0 1.0 0.0
 Controller
 Sprite
 Player.bmp 20 20

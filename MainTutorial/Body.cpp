@@ -87,7 +87,7 @@ void Body::Serialize(FILE** fpp)
 		inverseMass = 0.f;
 	}
 
-
+	accelX = accelY = totalForceX=totalForceY= 0.f;
 
 	char shapeType[256];
 	memset(shapeType, 0, 256 * sizeof(char));

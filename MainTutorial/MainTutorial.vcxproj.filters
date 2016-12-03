@@ -533,9 +533,6 @@
     <Text Include="TextFiles\AlienSDLVer.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
-    <Text Include="TextFiles\AsteroidSDLVer.txt">
-      <Filter>Resource Files\Serialization Text Files</Filter>
-    </Text>
     <Text Include="TextFiles\BulletSDLVer.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
@@ -543,6 +540,18 @@
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
     <Text Include="TextFiles\PlayerSDLVer.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Level.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Asteroid1SDLVer.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Asteroid2SDLVer.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\Asteroid3SDLVer.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
   </ItemGroup>

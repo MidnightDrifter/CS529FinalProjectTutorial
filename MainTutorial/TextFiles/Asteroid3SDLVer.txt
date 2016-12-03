@@ -1,0 +1,8 @@
+Transform
+900.0 300.0 1.5 1.5 0
+Sprite
+Asteroid.bmp 75 75
+Body
+30.0
+AABB
+-0.5, 0.5, 0.5, -0.5

@@ -1,5 +1,7 @@
 #include "CollisionManager.h"
 #include "Body.h"
+#include "Math2D.h"
+#include "Vector2D.h"
 
 
 Shape::Shape(SHAPE_TYPE t) : shapeType(t), bodyOwner(NULL)
@@ -65,10 +67,14 @@ void CollisionManager::Reset(void)
 bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape* circle2, float posX2, float posY2, std::list<Contact*> &c)
 {
 	//Check for collision between shapes
-	
+	Vector2D c1, c2;
+	Vector2DSet(&c1, posX1, posY1);
+	Vector2DSet(&c2, posX2, posY2);
+	ShapeCircle* circ1 = static_cast<ShapeCircle*>(circle1);
+	ShapeCircle* circ2 = static_cast<ShapeCircle*>(circle2);
 
 	//If collision, create contact
-	if (true) //Collision check goes here
+	if (1 == StaticCircleToStaticCircle(&c1, circ1->radius, &c2, circ2->radius)) //Collision check goes here
 	{
 		Contact*pc = new Contact();
 		pc->bodiesColliding[0] = circle1->bodyOwner;
@@ -84,14 +90,18 @@ bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape*
 bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c)
 {
 	//Check for collision between shapes
-	Vector2D* rect1, *rect2;
+	Vector2D rect1, rect2;
 	float w1, w2, h1, h2;
 
+	Vector2DSet(&rect1, posX1, posY1);
+	Vector2DSet(&rect2, posX2, posY2);
 
+	ShapeAABB* r1 = static_cast<ShapeAABB*>(AABB1);
+	ShapeAABB* r2 = static_cast<ShapeAABB*>(AABB2);
 
 
 	//If collision, create contact
-	if (true) //Collision check goes here 
+	if (1==StaticRectToStaticRect(&rect1, (r1->right - r1->left), (r1->top - r1->bot),&rect2, (r2->right - r2->left), (r2->top - r2->bot) )) //Collision check goes here 
 	{
 		Contact*pc = new Contact();
 	pc->bodiesColliding[0] = AABB1->bodyOwner;
@@ -108,11 +118,15 @@ bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2
 bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c)
 {
 	//Check for collision between shapes
+	ShapeCircle* ci = static_cast<ShapeCircle*>(circle1);
+		ShapeAABB* r = static_cast<ShapeAABB*>(AABB2);
 
-
+		Vector2D circ1, rect1;
+		Vector2DSet(&circ1, posX1, posY1);
+		Vector2DSet(&rect1, posX2, posY2);
 	//If collision, create contact
 
-	if (true) //Collision check goes here
+	if (1==StaticCircleToStaticRectangle(&circ1, ci->radius, &rect1, (r->left - r->right), (r->top - r->bot))) //Collision check goes here
 	{
 		Contact*pc = new Contact();
 		pc->bodiesColliding[0] = circle1->bodyOwner;

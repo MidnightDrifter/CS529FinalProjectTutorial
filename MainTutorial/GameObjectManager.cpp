@@ -43,26 +43,36 @@ void GameObjectManager::LoadLevel(const char* s)
 		fscanf(fp, "%s\n", c);
 
 
-		if (strcmp(c, "Bullet.txt"))
+		if (0==strcmp(c, "Asteroid1.txt"))
 		{
-			obj = LoadObject("TextFiles\\Bullet.txt");
-			obj->setType(GAME_OBJECT_TYPE::BULLET);
+			obj = LoadObject("TextFiles\\Asteroid1SDLVer.txt");
+			obj->setType(GAME_OBJECT_TYPE::ASTEROID);
 		}
 
-		else if (strcmp(c, "Alien.txt"))
+		else if (0 == strcmp(c, "Asteroid2.txt"))
 		{
-			obj = LoadObject("TextFiles\\Alien.txt");
+			obj = LoadObject("TextFiles\\Asteroid2SDLVer.txt");
+			obj->setType(GAME_OBJECT_TYPE::ASTEROID);
+		}
+		else if (0 == strcmp(c, "Asteroid3.txt"))
+		{
+			obj = LoadObject("TextFiles\\Asteroid3SDLVer.txt");
+			obj->setType(GAME_OBJECT_TYPE::ASTEROID);
+		}
+		else if (0 == strcmp(c, "Alien.txt"))
+		{
+			obj = LoadObject("TextFiles\\AlienSDLVer.txt");
 			obj->setType(GAME_OBJECT_TYPE::ALIEN);
 
 		}
 
-		else if (strcmp(c, "Player.txt"))
+		else if (0 == strcmp(c, "Player.txt"))
 		{
-			obj = LoadObject("TextFiles\\Player.txt");
+			obj = LoadObject("TextFiles\\PlayerSDLVer.txt");
 			obj->setType(GAME_OBJECT_TYPE::PLAYER);
 		}
 
-		else if (strcmp(c, "Transform") && obj != NULL)
+		else if (0 == strcmp(c, "Transform") && obj != NULL)
 		{
 			float x, y;
 			fscanf(fp,"%f %f\n", &x, &y);
@@ -70,6 +80,11 @@ void GameObjectManager::LoadLevel(const char* s)
 			t->setX(x);
 			t->setY(y);
 			
+		}
+
+		else if (0 == strcmp(c, "DONE") && obj != NULL)
+		{
+			objects.push_back(obj);
 		}
 	}
 	fclose(fp);
@@ -94,30 +109,30 @@ GameObject* GameObjectManager::spawnObject(GAME_OBJECT_TYPE g)
 		//obj->addComponent(&t);
 
 
-		obj = LoadObject("TextFiles\\Bullet.txt");
+		obj = LoadObject("TextFiles\\BulletSDLVer.txt");
 		obj->setType(GAME_OBJECT_TYPE::BULLET);
 	}
 
 	else if (g == GAME_OBJECT_TYPE::ASTEROID)
 	{
-		obj = LoadObject("TextFiles\\Asteroid.txt");
+		obj = LoadObject("TextFiles\\AsteroidSDLVer.txt");
 		obj->setType(GAME_OBJECT_TYPE::ASTEROID);
 	}
 
 	else if (g == GAME_OBJECT_TYPE::PLAYER)
 	{
-		obj = LoadObject("TextFiles\\Player.txt");
+		obj = LoadObject("TextFiles\\PlayerSDLVer.txt");
 		obj->setType(GAME_OBJECT_TYPE::PLAYER);
 	}
 	else if (g == GAME_OBJECT_TYPE::ALIEN)
 	{
-		obj = LoadObject("TextFiles\\Alien.txt");
+		obj = LoadObject("TextFiles\\AlienSDLVer.txt");
 		obj->setType(GAME_OBJECT_TYPE::ALIEN);
 	}
 
 	else if (g == GAME_OBJECT_TYPE::MISSILE)
 	{
-		obj = LoadObject("TextFiles\\HomingMissile.txt");
+		obj = LoadObject("TextFiles\\HomingMissileSDLVer.txt");
 		obj->setType(GAME_OBJECT_TYPE::MISSILE);
 	}
 	if (obj)
@@ -156,8 +171,8 @@ GameObject* GameObjectManager::LoadObject(const char *pFilename)
 
 		else if (0 == strcmp("Sprite", name))
 		{
-			//SpriteBasic* t = new SpriteBasic();
-			Sprite* t = new Sprite();
+			SpriteBasic* t = new SpriteBasic();
+			//Sprite* t = new Sprite();
 			t->Serialize(&fp);
 			obj->addComponent(t);
 		}

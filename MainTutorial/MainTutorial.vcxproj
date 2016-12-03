@@ -317,11 +317,14 @@
     <Text Include="TextFiles\Alien.txt" />
     <Text Include="TextFiles\AlienSDLVer.txt" />
     <Text Include="TextFiles\Asteroid.txt" />
-    <Text Include="TextFiles\AsteroidSDLVer.txt" />
+    <Text Include="TextFiles\Asteroid1SDLVer.txt" />
+    <Text Include="TextFiles\Asteroid2SDLVer.txt" />
+    <Text Include="TextFiles\Asteroid3SDLVer.txt" />
     <Text Include="TextFiles\Bullet.txt" />
     <Text Include="TextFiles\BulletSDLVer.txt" />
     <Text Include="TextFiles\HomingMissile.txt" />
     <Text Include="TextFiles\HomingMissileSDLVer.txt" />
+    <Text Include="TextFiles\Level.txt" />
     <Text Include="TextFiles\Player.txt" />
     <Text Include="TextFiles\PlayerSDLVer.txt" />
   </ItemGroup>

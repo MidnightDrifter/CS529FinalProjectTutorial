@@ -10,6 +10,7 @@ extern InputManager& InputMgr;
 extern GameObjectManager& GameObjMgr;
 extern ResourceManager& ResourceMgr;
 extern EventManager& EventMgr;
+extern GameObject* player;
 
 Controller::Controller() : Component(COMPONENT_TYPE::CONTROLLER)
 {
@@ -152,14 +153,22 @@ void Controller::handleEvent(Event* e)
 		//	b->currPosY = 0;
 
 			//Reset the controller object--this object--destroy the enemy object
-			delete otherCollider;  //Destroy it through the game object manager instead??
+		//	delete otherCollider;  //Destroy it through the game object manager instead??
 			
-			b->currPosX = 0.5f;  //Some starting position
-			b->currPosY = 0.5f; 
+		//	b->currPosX = 0.5f;  //Some starting position
+		//	b->currPosY = 0.5f; 
 
 			//Don't need player hit event, collision works just fine
-		
-	
+			GameObjMgr.objects.clear();
+			GameObjMgr.LoadLevel("TextFiles//Level.txt");
+			for (int i = 0; i < GameObjMgr.objects.size(); i++)
+			{
+				if (GameObjMgr.objects[i]->getType() == GAME_OBJECT_TYPE::PLAYER)
+				{
+					player = GameObjMgr.objects[i];
+					i = GameObjMgr.objects.size();
+				}
+			}
 		
 		}
 		/*

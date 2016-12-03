@@ -28,8 +28,8 @@
 //# define GL3_PROTOTYPES 1
 const int SCREEN_HEIGHT = 800;
 const int SCREEN_WIDTH = 1200;
-const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
-const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
+//const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
+//const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
 const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
 const float GRAVITY = 0.f;
 
@@ -267,7 +267,7 @@ int main(int argc, char* argv[])
 
 
 		window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);// | SDL_WINDOW_OPENGL);
 
 		// Check that everything worked out okay
 		if (!window)
@@ -338,8 +338,8 @@ int main(int argc, char* argv[])
 //Get rid of buffers, send to graphics card already!
 		delete[] pPosition;
 		delete[] pColor;
-
-		//winSurface = SDL_GetWindowSurface(window);
+		*/
+		winSurface = SDL_GetWindowSurface(window);
 		/*
 		SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
 		SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
@@ -383,11 +383,18 @@ int main(int argc, char* argv[])
 			bool isRunning = true;
 			int testing = 0;
 
-
-			player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
+			GameObjMgr.LoadLevel("TextFiles//Level.txt");
+			//player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
 		//	Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
-
+			for (int i = 0; i < GameObjMgr.objects.size(); i++)
+			{
+				if(GameObjMgr.objects[i]->getType() == GAME_OBJECT_TYPE::PLAYER)
+				{
+					player = GameObjMgr.objects[i];
+					i = GameObjMgr.objects.size();
+				}
+			}
 
 
 			while (isRunning)
@@ -475,7 +482,7 @@ int main(int argc, char* argv[])
 
 
 
-				SDL_FillRect(winSurface, NULL, 0);
+			//	SDL_FillRect(winSurface, NULL, 0);
 				
 
 				// 512 x 365
@@ -492,10 +499,10 @@ int main(int argc, char* argv[])
 					if (t != NULL && s != NULL)
 					{
 						SDL_Rect destRect;
-						destRect.x = t->getX();
+						destRect.x = t->getX() ;
 						destRect.y = t->getY();
-						destRect.w = 512;
-						destRect.h = 365;
+						destRect.w = s->width;
+						destRect.h = s->height;
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
@@ -576,7 +583,7 @@ int main(int argc, char* argv[])
 				*/
 
 
-				SDL_GL_SwapWindow(window);  //Update the window
+			//	SDL_GL_SwapWindow(window);  //Update the window
 				framerateController.FrameEnd();
 			}	//GAME LOOP HERE
 
