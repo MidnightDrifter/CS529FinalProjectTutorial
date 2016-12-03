@@ -186,10 +186,7 @@ CollisionManager::CollisionManager() : contacts()
 
 CollisionManager::~CollisionManager()
 {
-	for (auto i : contacts)
-	{
-		delete i;
-	}
+
 
 	contacts.clear();
 }

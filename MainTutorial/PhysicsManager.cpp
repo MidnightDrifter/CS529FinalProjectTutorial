@@ -55,7 +55,7 @@ void PhysicsManager::Integrate(float deltaTime)
 				{
 					Body* body2 = (Body*)GameObjMgr.objects.at(j)->getComponent(COMPONENT_TYPE::BODY);
 				
-					if (NULL != body2)
+					if (NULL != body2 && body2 != body1)
 					{
 						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY);
 					}
@@ -78,12 +78,12 @@ void PhysicsManager::Integrate(float deltaTime)
 		//Commit changes from physics -> transform	
 		for (GameObject* g : GameObjMgr.objects)
 		{
-			Body *pBody = (Body*)g->getComponent(COMPONENT_TYPE::BODY);
-			Homing* h = (Homing*)g->getComponent(COMPONENT_TYPE::HOMING);
+			Body *pBody = static_cast<Body*>(g->getComponent(COMPONENT_TYPE::BODY));
+			Homing* h = static_cast<Homing*>(g->getComponent(COMPONENT_TYPE::HOMING));
 			
-			if (NULL != pBody)
+			if (NULL != pBody && h != NULL)
 			{
-				Transform *pTransform = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+				Transform *pTransform = static_cast<Transform*>(g->getComponent(COMPONENT_TYPE::TRANSFORM));
 				//pTransform->Integrate(deltaTime *0.0
 				pTransform->setX(pBody->currPosX);
 				pTransform->setY(pBody->currPosY);
@@ -125,8 +125,17 @@ void PhysicsManager::Integrate(float deltaTime)
 					Vector2DSet(&normal, myVel.y * -1, myVel.x);
 					Vector2DSet(&targetVec, targetTransform->getX() - t->getX(), targetTransform->getY() - t->getY());
 
-					float angle = (myVel.x * targetVec.x + myVel.y*targetVec.y) / (Vector2DLength(&myVel) * Vector2DLength(&targetVec));
-					float a = std::min(MAX_HOMING_ROTATION_SPEED * framerateController.getFrameTime(), acosf(angle));
+					float myLen = Vector2DLength(&myVel);
+					float targetLen = Vector2DLength(&targetVec);
+					float angle;
+					if (myLen == 0 || targetLen == 0)
+					{
+						angle = 0.f;
+					}
+					else {
+						angle = (myVel.x * targetVec.x + myVel.y*targetVec.y) / (Vector2DLength(&myVel) * Vector2DLength(&targetVec));
+					}
+						float a = std::min(MAX_HOMING_ROTATION_SPEED * framerateController.getFrameTime(), acosf(angle));
 
 					if (normal.x * targetVec.x + normal.y * targetVec.y < 0)
 					{
@@ -155,6 +164,8 @@ void PhysicsManager::Integrate(float deltaTime)
 					pBody->velY = out.y;
 
 				}
+				pBody = NULL;
+				h = NULL;
 			}
 
 		}

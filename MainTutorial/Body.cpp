@@ -41,8 +41,8 @@ void Body::Integrate(float deltaTime, float gravity)
 	//Compute accel.
 	//totalForceY += gravity;  //Irrelevant for me b/c Asteroids
 
-	accelX = totalForceX*inverseMass;
-	accelY = totalForceY*inverseMass;
+	//accelX = totalForceX*inverseMass;
+	//accelY = totalForceY*inverseMass;
 
 	//Compute vel.
 	velX += accelX * deltaTime;

@@ -15,7 +15,7 @@ Transform::~Transform()
 
 
 void Transform::Update()
-{
+{/*
 	xPos = xPos;
 	yPos = yPos;
 	xScale = xScale;
@@ -23,7 +23,9 @@ void Transform::Update()
 	rotation = rotation;
 	//Check degree vs. rotation for Rotate???
 	transformMatrix = Translate(xPos, yPos, 0) * Scale(xScale, yScale, 1) * Rotate(2, rotation);
-}
+
+	*/
+	}
 
 
 void Transform::Serialize(FILE** fpp)

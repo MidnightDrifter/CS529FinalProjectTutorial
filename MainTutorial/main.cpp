@@ -385,7 +385,7 @@ int main(int argc, char* argv[])
 
 			GameObjMgr.LoadLevel("TextFiles//Level.txt");
 			//player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
-
+			player = player;
 		//	Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
 			for (int i = 0; i < GameObjMgr.objects.size(); i++)
 			{
@@ -462,7 +462,8 @@ int main(int argc, char* argv[])
 				*/
 
 			//	SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
-			
+				player;
+				Body * bodddd = static_cast<Body*>(player->getComponent(COMPONENT_TYPE::BODY));
 				InputMgr.Update();
 
 				float frametime = (float)(framerateController.getFrameTime()) / 1000.f;
@@ -493,8 +494,8 @@ int main(int argc, char* argv[])
 
 				for (GameObject* g : GameObjMgr.objects)
 				{
-					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
-					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+					SpriteBasic* s = static_cast<SpriteBasic*>(g->getComponent(COMPONENT_TYPE::SPRITE));
+					Transform* t = static_cast<Transform*>(g->getComponent(COMPONENT_TYPE::TRANSFORM));
 				//	Sprite* s = (Sprite*)g->getComponent(COMPONENT_TYPE::SPRITE);
 					if (t != NULL && s != NULL)
 					{
@@ -512,7 +513,8 @@ int main(int argc, char* argv[])
 						//s->GenerateBuffers();
 					//	s->Draw(globalShaderID);
 					}
-
+					t = NULL;
+					s = NULL;
 
 					
 				}
