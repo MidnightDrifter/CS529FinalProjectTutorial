@@ -30,6 +30,8 @@ public:
 	float getYScale() const { return yScale; }
 	float getRotation() const { return rotation; }  //check degree vs. rad ???
 
+	float rotation;
+
 	MAT4 transformMatrix;
 
 private:
@@ -37,7 +39,7 @@ private:
 	float yPos;
 	float xScale;
 	float yScale;
-	float rotation;
+
 	
 
 

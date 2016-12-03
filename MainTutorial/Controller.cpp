@@ -25,28 +25,31 @@ Controller::~Controller()
 void Controller::Update()
 {
 	float SHIP_ACCELERATION = 300.f;
+	float SHIP_ROTATION_SPEED = 10.f ;
 	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
 
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX-=(SHIP_ACCELERATION * cosf(t->getRotation()));
+		t->rotation += SHIP_ROTATION_SPEED;
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation()));
+		t->rotation -= SHIP_ROTATION_SPEED;
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()));
 	}
 	
 
