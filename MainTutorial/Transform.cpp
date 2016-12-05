@@ -15,14 +15,14 @@ Transform::~Transform()
 
 
 void Transform::Update()
-{/*
+{
 	xPos = xPos;
 	yPos = yPos;
 	xScale = xScale;
 	yScale = yScale;
 	rotation = rotation;
 	//Check degree vs. rotation for Rotate???
-	transformMatrix = Translate(xPos, yPos, 0) * Scale(xScale, yScale, 1) * Rotate(2, rotation);
+/*	transformMatrix = Translate(xPos, yPos, 0) * Scale(xScale, yScale, 1) * Rotate(2, rotation);
 
 	*/
 	}

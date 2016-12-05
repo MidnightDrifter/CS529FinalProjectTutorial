@@ -154,7 +154,8 @@ void PhysicsManager::Integrate(float deltaTime)
 					else if (g->getType() == GAME_OBJECT_TYPE::ALIEN)
 					{
 						scale = MISSILE_SPEED;
-						scale /= 2.f;
+						scale /= 4000.f;
+						scale = 0;
 
 					}
 

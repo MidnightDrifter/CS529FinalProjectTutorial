@@ -24,7 +24,7 @@ Controller::~Controller()
 
 void Controller::Update()
 {
-	float SHIP_ACCELERATION = 300.f;
+	float SHIP_ACCELERATION = 300000.f;
 	float SHIP_ROTATION_SPEED = 10.f ;
 	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));

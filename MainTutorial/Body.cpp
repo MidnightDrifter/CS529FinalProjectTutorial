@@ -58,7 +58,7 @@ void Body::Integrate(float deltaTime, float gravity)
 	//Update transform component
 	if (owner)
 	{
-		Transform* t = (Transform*)owner->getComponent(COMPONENT_TYPE::TRANSFORM);
+		Transform* t = static_cast<Transform*>(owner->getComponent(COMPONENT_TYPE::TRANSFORM));
 		if (t)
 		{
 			t->setX(currPosX);
