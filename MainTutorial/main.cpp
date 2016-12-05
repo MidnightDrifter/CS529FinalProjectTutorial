@@ -22,14 +22,13 @@
 #include "PhysicsManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
-#include <Windows.h>
-//#pragma comment (lib, "glew32.lib")
-//#pragma comment (lib, "glfw3.lib")
-//# define GL3_PROTOTYPES 1
+#pragma comment (lib, "glew32.lib")
+#pragma comment (lib, "glfw3.lib")
+# define GL3_PROTOTYPES 1
 const int SCREEN_HEIGHT = 800;
 const int SCREEN_WIDTH = 1200;
-//const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
-//const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
+const int OPEN_GL_MAJOR_VERSION = 3; //OpenGL version 3.x
+const int OPEN_GL_MINOR_VERSION = 2;  // OpenGL version x.2
 const int USE_DOUBLE_BUFFER = 1;  //1 = use double buffering
 const float GRAVITY = 0.f;
 
@@ -45,73 +44,14 @@ int test;
 SDL_Window* window;
 SDL_Surface* surface;
 SDL_Surface* winSurface;
-//SDL_GLContext context;
+SDL_GLContext context;
 InputManager& InputMgr = InputManager();
-FramerateController& framerateController = FramerateController(30);
+FramerateController& framerateController = FramerateController(5);
 ResourceManager& ResourceMgr = ResourceManager();
 GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
 CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
-//SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-GameObject* player;
-
-/*
-GLint globalShaderID;
-
-void LoadShaders(void)
-{
-	//Step 1 - make program
-	globalShaderID = glCreateProgram();
-
-	//Step 2 - make vertex & pixel shaders, create + compile
-
-	//Vertetx shader
-
-	const char * vertexShaderCode = "uniform mat4 transform;  attribute vec4 aPosition;  attribute vec4 aColor;  varying vec4 vColor;  void main() {vec4 worldPos = transform * aPosition;  vColor = aColor;  gl_Position = worldPos;}";
-	const char* fragmentShaderCode = "varying vec4 vColor;  void main() {gl_FragColor = vColor;} ";
-
-	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShaderID,1, &vertexShaderCode, NULL);
-	glCompileShader(vertexShaderID);
-
-	GLint status;
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &status);
-	if (status == GL_TRUE)
-	{
-		glAttachShader(globalShaderID, vertexShaderID);
-	}
-
-	GLuint fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragShaderID, 1, &fragmentShaderCode, NULL);
-	glCompileShader(fragShaderID);
-
-	glGetShaderiv(fragShaderID, GL_COMPILE_STATUS, &status);
-		if (status == GL_TRUE)
-		{
-			glAttachShader(globalShaderID, fragShaderID);
-		}
-
-		//3)  Link program
-		glLinkProgram(globalShaderID);
-		//4)  Use program
-		glUseProgram(globalShaderID);
-
-}
-
-
-
-*/
-
-
-
-
-
-
-
-
-
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -233,10 +173,10 @@ int main(int argc, char* argv[])
 	}
 
 
-//	ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
-//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
-//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
-//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
+	ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
+	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
 
 	//SDL_Surface* ppImage[4] = { NULL, NULL, NULL, NULL };
 
@@ -250,8 +190,6 @@ int main(int argc, char* argv[])
 //	SpriteBasic* testSprite = static_cast<SpriteBasic*>(testObject->getComponent(COMPONENT_TYPE::SPRITE));
 //	Controller* testController = static_cast<Controller*>(testObject->getComponent(COMPONENT_TYPE::CONTROLLER));
 
-
-
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -262,12 +200,8 @@ int main(int argc, char* argv[])
 	{
 		//return 0;
 		//printf
-	//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-	//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-
-
 		window = SDL_CreateWindow("Test Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);// | SDL_WINDOW_OPENGL);
+			SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
 		// Check that everything worked out okay
 		if (!window)
@@ -276,69 +210,6 @@ int main(int argc, char* argv[])
 			//CheckSDLError(__LINE__);
 			return false;
 		}
-		/*
-		//context = SDL_GL_CreateContext(window);
-		
-		if (glewInit() != GLEW_OK)
-		{
-			printf("GLEW intitialization failed.\n");
-			return false;
-		}
-
-
-		//Ensure OpenGL 2.0 is supported
-		if(!GLEW_VERSION_2_0)
-		{ return false; }
-
-		LoadShaders();
-		
-
-		GLuint bufferPosition, bufferColors;
-		glGenBuffers(1, &bufferPosition);  //Position buffer
-		glGenBuffers(1, &bufferColors);  //Color buffer
-
-		int vertexNum = 3;   //Number of vertices
-		int coordsPerPosition = 3;    // (x,y,z)
-		int colorsPerPosition = 4;   //4 vals per color, RGBA
-
-		int posBufferSize = vertexNum * coordsPerPosition * sizeof(GLfloat);
-		int colorBufferSize = vertexNum * colorsPerPosition * sizeof(GLfloat);
-
-		GLfloat* pPosition = new GLfloat[vertexNum * coordsPerPosition];
-		GLfloat* pColor = new GLfloat[vertexNum * colorsPerPosition];
-
-
-
-		//glVertex2f(-0.5f, -0.5f);  glColor3f(1.0f, 0.0f, 0.f);  //Vertex pos, vertex color -- colors are normalized from 0-1
-		//glVertex2f(0.5f, -0.5f);  glColor3f(0.0f, 01.f, 0.f);
-		//glVertex2f(0.5f, 0.5f);  glColor3f(0.f, 0.f, 01.f);
-
-
-		pPosition[0] = -0.5f;  pPosition[1] = -0.5f;  pPosition[2] = 0.f;   //Vertex 1  (-.5, -.5, 0)
-		pColor[0] = 1.f;  pColor[1] = 0.f;  pColor[2] = 0.f;  pColor[3] = 1.f;
-
-		pPosition[3] = 0.5f;  pPosition[4] = -0.5f;  pPosition[5] = 0.f;   //Vertex 2  (.5, -.5, 0)
-		pColor[4] = 0.f;  pColor[5] = 1.f;  pColor[6] = 0.f;  pColor[7] = 1.f;
-
-
-		pPosition[6] = 0.5f;  pPosition[7] = 0.5f;  pPosition[8] = 0.f;   //Vertex 3  (.5, .5, 0)
-		pColor[8] = 0.f;  pColor[9] = 0.f;  pColor[10] =1.f;  pColor[11] = 1.f;
-
-		//Pass position buffer to OpenGL, graphics card
-		glBindBuffer(GL_ARRAY_BUFFER, bufferPosition);   //Specify buffer
-		glBufferData(GL_ARRAY_BUFFER, posBufferSize, pPosition, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
-		glBindBuffer(GL_ARRAY_BUFFER, 0);  //Clear what buffer you're bound to
-
-		glBindBuffer(GL_ARRAY_BUFFER, bufferColors);  //Pass color buffer to OpenGl, graphics card
-		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, pColor, GL_STATIC_DRAW);  //Specify data inside buffer--what kind of format, size of buffer, pointer to data, what to do with the data
-		glBindBuffer(GL_ARRAY_BUFFER, 0);   //Clear what buffer you're bound to
-
-		glFinish();  //Have everything wait until the drawing is done
-
-//Get rid of buffers, send to graphics card already!
-		delete[] pPosition;
-		delete[] pColor;
-		*/
 		winSurface = SDL_GetWindowSurface(window);
 		/*
 		SDL_Surface * currentSurface = ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
@@ -383,19 +254,8 @@ int main(int argc, char* argv[])
 			bool isRunning = true;
 			int testing = 0;
 
-			GameObjMgr.LoadLevel("TextFiles//Level.txt");
-			//player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
-			player = player;
-		//	Sprite* s = static_cast<Sprite*>(startingObject->getComponent(COMPONENT_TYPE::SPRITE));
-			for (int i = 0; i < GameObjMgr.objects.size(); i++)
-			{
-				if(GameObjMgr.objects[i]->getType() == GAME_OBJECT_TYPE::PLAYER)
-				{
-					player = GameObjMgr.objects[i];
-					i = GameObjMgr.objects.size();
-				}
-			}
 
+			GameObject* startingObject = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
 			while (isRunning)
 			{
@@ -462,130 +322,49 @@ int main(int argc, char* argv[])
 				*/
 
 			//	SDL_BlitSurface(currentSurface, NULL, winSurface, NULL);
-				player;
-				Body * bodddd = static_cast<Body*>(player->getComponent(COMPONENT_TYPE::BODY));
+			
 				InputMgr.Update();
 
 				float frametime = (float)(framerateController.getFrameTime()) / 1000.f;
 				PhysicsMgr.Integrate(frametime/1000.f);
 				EventMgr.Update(frametime);
 
-				//for (GameObject* g : GameObjMgr.objects)
-				int size = GameObjMgr.objects.size();
-				for(int i=0;i<size;i++)
+				for (GameObject* g : GameObjMgr.objects)
 				{
-					GameObjMgr.objects.at(i)->Update();
-					size = GameObjMgr.objects.size();
-				//	g->Update();
+				
+					g->Update();
 
 				}
 
 
 
 
-			//	SDL_FillRect(winSurface, NULL, 0);
-				
+				//SDL_FillRect(winSurface, NULL, 0);
+				SDL_Rect destRect;
 
 				// 512 x 365
+				destRect.w = 512;
+				destRect.h = 365;
 
-				int vertexNum = 3;   //Number of vertices
-				int coordsPerPosition = 3;    // (x,y,z)
-				int colorsPerPosition = 4;   //4 vals per color, RGBA
 
 				for (GameObject* g : GameObjMgr.objects)
 				{
-					SpriteBasic* s = static_cast<SpriteBasic*>(g->getComponent(COMPONENT_TYPE::SPRITE));
-					Transform* t = static_cast<Transform*>(g->getComponent(COMPONENT_TYPE::TRANSFORM));
-				//	Sprite* s = (Sprite*)g->getComponent(COMPONENT_TYPE::SPRITE);
+					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
+					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
 					if (t != NULL && s != NULL)
 					{
-						SDL_Rect destRect;
-						destRect.x = t->getX() ;
+						destRect.x = t->getX();
 						destRect.y = t->getY();
-						destRect.w = s->width;
-						destRect.h = s->height;
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
 
 						SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
-
-						//s->GenerateBuffers();
-					//	s->Draw(globalShaderID);
 					}
-					t = NULL;
-					s = NULL;
-
 					
 				}
 				SDL_UpdateWindowSurface(window);
-				//glClearColor(0.f, 1.f, 1.f, 0.f);  //Default background color
-				//glClear(GL_COLOR_BUFFER_BIT);  //Clear framebuffer
 
-
-
-				//DRAW A TRIANGLE WHEEEEE
-				//Fixed pipeline - OpenGL try 1
-				//glBegin(GL_TRIANGLES);
-				//glVertex2f(-0.5f, -0.5f);  glColor3f(1.0f, 0.0f, 0.f);  //Vertex pos, vertex color -- colors are normalized from 0-1
-				//glVertex2f(0.5f, -0.5f);  glColor3f(0.0f, 01.f, 0.f);
-				//glVertex2f(0.5f, 0.5f);  glColor3f(0.f, 0.f, 01.f);
-
-				//Without any perspective / Projection matrix, these 0-1 values from the vertices will correspond to the aspect ratio of the screen
-
-				//This set of vertices--directly set--is fixed pipeline.  No shading.
-
-				//glEnd();
-
-				//Fixed pipeline w/ VBO
-				//OpenGL try 2
-				
-				/*
-				glEnableClientState(GL_VERTEX_ARRAY);
-				glEnableClientState(GL_COLOR_ARRAY);
-
-
-				glBindBuffer(GL_ARRAY_BUFFER, bufferPosition);
-				glVertexPointer(coordsPerPosition, GL_FLOAT, coordsPerPosition * sizeof(GLfloat), NULL);
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-				glBindBuffer(GL_ARRAY_BUFFER, bufferColors);
-				glVertexPointer(colorsPerPosition, GL_FLOAT, colorsPerPosition * sizeof(GLfloat), NULL);
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
-			//	glDrawArrays(GL_TRIANGLES, 0, vertexNum);
-
-
-				glDisableClientState(GL_VERTEX_ARRAY);
-				glDisableClientState( GL_COLOR_ARRAY);
-				
-
-
-				int posHandle, colorHandle, matrixHandle;
-				posHandle = glGetAttribLocation(globalShaderID, "aPosition");
-				glEnableVertexAttribArray(posHandle);
-				glBindBuffer(GL_ARRAY_BUFFER, bufferPosition);
-				glVertexAttribPointer(posHandle, coordsPerPosition,GL_FLOAT,false,0,NULL);
-
-				colorHandle = glGetAttribLocation(globalShaderID, "aColor");
-				glEnableVertexAttribArray(colorHandle);
-				glBindBuffer(GL_ARRAY_BUFFER, bufferColors);
-				glVertexAttribPointer(colorHandle, colorsPerPosition, GL_FLOAT, false, 0, NULL);
-
-				matrixHandle = glGetUniformLocation(globalShaderID, "transform");
-				GLfloat mat[4][4] = { 0 };
-				mat[0][0] = mat[1][1] = mat[2][2] = mat[3][3] = 1.f;
-				glUniformMatrix4fv( matrixHandle, 1, false, mat[0]);
-
-
-
-
-				glDrawArrays(GL_TRIANGLES, 0, vertexNum);
-				*/
-
-
-			//	SDL_GL_SwapWindow(window);  //Update the window
 				framerateController.FrameEnd();
 			}	//GAME LOOP HERE
 
@@ -597,9 +376,6 @@ int main(int argc, char* argv[])
 		//	{
 			//	SDL_FreeSurface(ppImage[i]);
 		//	}
-
-
-		//	SDL_GL_DeleteContext(context);
 			SDL_FreeSurface(winSurface);
 		//	SDL_GL_DeleteContext(context);
 
