@@ -92,11 +92,11 @@ public:
 	CollisionManager();
 	~CollisionManager();
 	void Reset(void);
-	bool CheckCollisionGenerateContacts(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2);
+	bool CheckCollisionGenerateContacts(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y);
 	std::list<Contact*> contacts;
 
 
-	bool(* CollisionTable[(int)Shape::SHAPE_TYPE::NUM][(int)Shape::SHAPE_TYPE::NUM])(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2, std::list<Contact*> &c);
+	bool(* CollisionTable[(int)Shape::SHAPE_TYPE::NUM][(int)Shape::SHAPE_TYPE::NUM])(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2, std::list<Contact*> &c, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y);
 
 
 

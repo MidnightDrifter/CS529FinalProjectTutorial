@@ -49,15 +49,19 @@ void PhysicsManager::Integrate(float deltaTime)
 		for (int i=0;i<numObjects;i++)// : GameObjMgr.objects)
 		{
 			Body* body1 = (Body*)GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::BODY);// a->getComponent(COMPONENT_TYPE::BODY);
-			if (NULL != body1)
+			Transform* t1 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
+			if (NULL != body1  && NULL != t1)
 			{
 				for (int j = i + 1; j < numObjects; j++)
 				{
 					Body* body2 = (Body*)GameObjMgr.objects.at(j)->getComponent(COMPONENT_TYPE::BODY);
+					Transform* t2 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
 				
-					if (NULL != body2 && body2 != body1)
+					if (NULL != body2 && body2 != body1 && NULL != t1 && NULL != t2)
 					{
-						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY);
+						int x1, y1, x2, y2;
+					//	x1 = body1->
+						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());
 					}
 				}
 
@@ -69,9 +73,15 @@ void PhysicsManager::Integrate(float deltaTime)
 			CollisionEvent c;
 			c.pObject1 = a->bodiesColliding[0]->owner;
 			c.pObject2 = a->bodiesColliding[1]->owner;
+			if (a->bodiesColliding[0] != NULL)
+			{
+				a->bodiesColliding[0]->owner->HandleEvent(&c);
+			}
+			if (a->bodiesColliding[1] != NULL)
+			{
+				a->bodiesColliding[1]->owner->HandleEvent(&c);
 
-			a->bodiesColliding[0]->owner->HandleEvent(&c);
-			a->bodiesColliding[1]->owner->HandleEvent(&c);
+			}
 		}
 
 

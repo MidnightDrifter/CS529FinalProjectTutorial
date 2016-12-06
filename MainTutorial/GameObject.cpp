@@ -49,10 +49,18 @@ void GameObject::addComponent(Component* c)
 
 void GameObject::HandleEvent(Event* e)
 {
-	for (auto a : components)
+	if (NULL != this )
 	{
-		a->handleEvent(e);
+		int size = components.size();
+		for (int i = 0; i < size; i++)
+		{
+			if (components[i] != NULL)
+			{
+				components[i]->handleEvent(e);
+			}
+			size = components.size();
+
+		}
 	}
+
 }
-
-

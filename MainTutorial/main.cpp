@@ -356,8 +356,8 @@ int main(int argc, char* argv[])
 				SDL_Rect destRect;
 
 				// 512 x 365
-				destRect.w = 512;
-				destRect.h = 365;
+			//	destRect.w = 512;
+			//	destRect.h = 365;
 
 
 				for (GameObject* g : GameObjMgr.objects)
@@ -366,8 +366,10 @@ int main(int argc, char* argv[])
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
 					if (t != NULL && s != NULL)
 					{
-						destRect.x = t->getX();
-						destRect.y = t->getY();
+						destRect.w = s->width;
+						destRect.h = s->height;
+						destRect.x = t->getX() - (destRect.w / 2);
+						destRect.y = t->getY() - (destRect.h / 2);
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 

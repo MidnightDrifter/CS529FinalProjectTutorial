@@ -64,7 +64,7 @@ void CollisionManager::Reset(void)
 	contacts.clear();
 }
 
-bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape* circle2, float posX2, float posY2, std::list<Contact*> &c)
+bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape* circle2, float posX2, float posY2, std::list<Contact*> &c, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
 	//Check for collision between shapes
 	Vector2D c1, c2;
@@ -87,9 +87,9 @@ bool CheckCollisionCircleCircle(Shape* circle1, float posX1, float posY1, Shape*
 }
 
 
-bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c)
+bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
-	//Check for collision between shapes
+	//Check for collision between shapes, 
 	Vector2D rect1, rect2;
 	float w1, w2, h1, h2;
 
@@ -101,7 +101,7 @@ bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2
 
 
 	//If collision, create contact
-	if (1==StaticRectToStaticRect(&rect1, (r1->right - r1->left), (r1->top - r1->bot),&rect2, (r2->right - r2->left), (r2->top - r2->bot) )) //Collision check goes here 
+	if (1==StaticRectToStaticRect(&rect1, shapeScale1X*(r1->right - r1->left), shapeScale1Y*(r1->top - r1->bot),&rect2, shapeScale2X*(r2->right - r2->left), shapeScale2Y*(r2->top - r2->bot) )) //Collision check goes here 
 	{
 		Contact*pc = new Contact();
 	pc->bodiesColliding[0] = AABB1->bodyOwner;
@@ -115,7 +115,7 @@ bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2
 
 
 
-bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c)
+bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* AABB2, float posX2, float posY2, std::list<Contact*> &c, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
 	//Check for collision between shapes
 	ShapeCircle* ci = static_cast<ShapeCircle*>(circle1);
@@ -126,7 +126,7 @@ bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* A
 		Vector2DSet(&rect1, posX2, posY2);
 	//If collision, create contact
 
-	if (1==StaticCircleToStaticRectangle(&circ1, ci->radius, &rect1, (r->left - r->right), (r->top - r->bot))) //Collision check goes here
+	if (1==StaticCircleToStaticRectangle(&circ1, ci->radius, &rect1, shapeScale2X*(r->left - r->right), shapeScale2Y*(r->top - r->bot))) //Collision check goes here
 	{
 		Contact*pc = new Contact();
 		pc->bodiesColliding[0] = circle1->bodyOwner;
@@ -139,14 +139,14 @@ bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* A
 }
 
 
-bool CheckCollisionAABBCircle(Shape* AABB1, float posX1, float posY1, Shape* circle2, float posX2, float posY2, std::list<Contact*> &c)
+bool CheckCollisionAABBCircle(Shape* AABB1, float posX1, float posY1, Shape* circle2, float posX2, float posY2, std::list<Contact*> &c, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
 	//Check for collision between shapes
 
 
 	//If collision, create contact
 
-	return CheckCollisionCircleAABB(circle2, posX2, posY2, AABB1, posX1, posY1, c);
+	return CheckCollisionCircleAABB(circle2, posX2, posY2, AABB1, posX1, posY1, c, shapeScale1X, shapeScale1Y, shapeScale2X, shapeScale2Y);
 
 }
 
@@ -166,9 +166,9 @@ bool CheckCollisionAABBCircle(Shape* AABB1, float posX1, float posY1, Shape* cir
 
 
 
-bool CollisionManager::CheckCollisionGenerateContacts(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2)
+bool CollisionManager::CheckCollisionGenerateContacts(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
-	return CollisionTable[(int)shape1->shapeType][(int)shape2->shapeType](shape1, posX1, posY1, shape2, posX2, posY1, contacts);
+	return CollisionTable[(int)shape1->shapeType][(int)shape2->shapeType](shape1, posX1, posY1, shape2, posX2, posY1, contacts, shapeScale1X, shapeScale1Y, shapeScale2X, shapeScale2Y);
 }
 
 

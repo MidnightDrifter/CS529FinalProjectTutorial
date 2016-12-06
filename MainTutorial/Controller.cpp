@@ -11,7 +11,8 @@ extern GameObjectManager& GameObjMgr;
 extern ResourceManager& ResourceMgr;
 extern EventManager& EventMgr;
 extern GameObject* player;
-
+#define MY_PI  3.14159265358979323846f 
+const float rad = 180.f / MY_PI;
 Controller::Controller() : Component(COMPONENT_TYPE::CONTROLLER)
 {
 	
@@ -25,7 +26,7 @@ Controller::~Controller()
 void Controller::Update()
 {
 	float SHIP_ACCELERATION = 3000000.f;
-	float SHIP_ROTATION_SPEED = 10.f ;
+	float SHIP_ROTATION_SPEED = 1.f ;
 	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
 
@@ -42,14 +43,14 @@ void Controller::Update()
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()));
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()*rad));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()*rad));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation()));
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation() *rad));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()*rad));
 	}
 	
 
@@ -102,8 +103,8 @@ void Controller::Update()
 		float bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
 		//t->setRotation(bulletRot);
 
-		b->velX = BULLET_SPEED * cosf(bulletRot);
-		b->velY = BULLET_SPEED * sinf(bulletRot);
+		b->velX = BULLET_SPEED * cosf(bulletRot*rad);
+		b->velY = BULLET_SPEED * sinf(bulletRot*rad);
 		
 		//b->velX = 1.f;   //Add rotation calculations here, scale by BULLET_SPEED
 		//b->velY = 1.f;

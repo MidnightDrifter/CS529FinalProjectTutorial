@@ -119,7 +119,7 @@ void Body::Serialize(FILE** fpp)
 
 void Body::handleEvent(Event* e)
 {
-	if (e->eType == EVENT_TYPE::COLLISION && (this->owner->getType() == GAME_OBJECT_TYPE::ALIEN || this->owner->getType()==GAME_OBJECT_TYPE::ALIEN))
+	if (e->eType == EVENT_TYPE::COLLISION && (this->owner->getType() == GAME_OBJECT_TYPE::ALIEN || this->owner->getType()==GAME_OBJECT_TYPE::ASTEROID))
 	{
 		CollisionEvent* c = static_cast<CollisionEvent*>(e);
 		GameObject* me = NULL;
