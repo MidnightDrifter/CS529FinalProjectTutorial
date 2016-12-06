@@ -52,6 +52,7 @@ GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
 CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
+GameObject* player;
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -255,7 +256,7 @@ int main(int argc, char* argv[])
 			int testing = 0;
 
 
-			GameObject* startingObject = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
+			 player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
 			while (isRunning)
 			{
@@ -353,8 +354,8 @@ int main(int argc, char* argv[])
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
 					if (t != NULL && s != NULL)
 					{
-						destRect.x = t->getX();
-						destRect.y = t->getY();
+						destRect.x = t->getX() - (destRect.w/2);
+						destRect.y = t->getY() - (destRect.h/2);
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
