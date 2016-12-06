@@ -14,6 +14,7 @@ public:
 	void Serialize(FILE **fpp);
 
 	void Integrate(float deltaTime, float gravity);  //Maybe not useful for me because asteroids
+	void handleEvent(Event* e);
 
 //private:
 	float currPosX, currPosY;

@@ -35,7 +35,7 @@ const float GRAVITY = 0.f;
 const float INSTRUCTION_POS_X = 0.f;
 const float INSTRUCTION_POS_Y = -200.f;
 
-
+GameObject* player;
 const float INSTRUCTION_WIDTH = 1.f;
 const float INSTRUCTION_HEIGHT = 1.f;  //Update & change these based on the size of the .bmp I make
 //Woo
@@ -52,7 +52,6 @@ GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
 CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
-GameObject* player;
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad
@@ -255,8 +254,17 @@ int main(int argc, char* argv[])
 			bool isRunning = true;
 			int testing = 0;
 
+			GameObjMgr.LoadLevel("TextFiles//Level.txt");
+			//GameObject* player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
 
-			 player = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::PLAYER);
+			for (int i = 0; i < GameObjMgr.objects.size(); i++)
+			{
+				if(GameObjMgr.objects[i]->getType() == GAME_OBJECT_TYPE::PLAYER)
+				{
+					player = GameObjMgr.objects[i];
+					i = GameObjMgr.objects.size();
+				}
+			}
 
 			while (isRunning)
 			{
@@ -329,18 +337,22 @@ int main(int argc, char* argv[])
 				float frametime = (float)(framerateController.getFrameTime()) / 1000.f;
 				PhysicsMgr.Integrate(frametime/1000.f);
 				EventMgr.Update(frametime);
-
-				for (GameObject* g : GameObjMgr.objects)
+				int size = GameObjMgr.objects.size();
+				for (int i=0;i<size;i++)
 				{
+					if(GameObjMgr.objects[i] != NULL)
+					{
+						GameObjMgr.objects[i]->Update();
+						size = GameObjMgr.objects.size();
+					}
 				
-					g->Update();
 
 				}
 
 
 
 
-				//SDL_FillRect(winSurface, NULL, 0);
+				SDL_FillRect(winSurface, NULL, 0);
 				SDL_Rect destRect;
 
 				// 512 x 365
@@ -354,8 +366,8 @@ int main(int argc, char* argv[])
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
 					if (t != NULL && s != NULL)
 					{
-						destRect.x = t->getX() - (destRect.w/2);
-						destRect.y = t->getY() - (destRect.h/2);
+						destRect.x = t->getX();
+						destRect.y = t->getY();
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
