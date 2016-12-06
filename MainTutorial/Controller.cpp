@@ -24,7 +24,7 @@ Controller::~Controller()
 
 void Controller::Update()
 {
-	float SHIP_ACCELERATION = 300000.f;
+	float SHIP_ACCELERATION = 3000000.f;
 	float SHIP_ROTATION_SPEED = 10.f ;
 	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
@@ -96,6 +96,14 @@ void Controller::Update()
 		b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
 		t->setX(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getX());
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
+
+
+		float BULLET_SPEED = 300555.f;
+		float bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
+		//t->setRotation(bulletRot);
+
+		b->velX = BULLET_SPEED * cosf(bulletRot);
+		b->velY = BULLET_SPEED * sinf(bulletRot);
 		
 		//b->velX = 1.f;   //Add rotation calculations here, scale by BULLET_SPEED
 		//b->velY = 1.f;
@@ -110,11 +118,13 @@ void Controller::Update()
 
 		//Transform* t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
 
+
 		b->currPosX = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosX);
 		b->currPosY = (static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->currPosY);
+		
 		t->setX(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getX());
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
-		t->setRotation(static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
+
 
 	}
 	

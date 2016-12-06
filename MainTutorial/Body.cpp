@@ -1,4 +1,5 @@
 #include "Body.h"
+#include "PhysicsManager.h"
 
 
 
@@ -73,6 +74,7 @@ void Body::Integrate(float deltaTime, float gravity)
 void Body::Update()
 {
 
+
 }
 
 void Body::Serialize(FILE** fpp)
@@ -112,4 +114,35 @@ void Body::Serialize(FILE** fpp)
 	}
 
 
+}
+
+
+void Body::handleEvent(Event* e)
+{
+	if (e->eType == EVENT_TYPE::COLLISION && (this->owner->getType() == GAME_OBJECT_TYPE::ALIEN || this->owner->getType()==GAME_OBJECT_TYPE::ALIEN))
+	{
+		CollisionEvent* c = static_cast<CollisionEvent*>(e);
+		GameObject* me = NULL;
+		GameObject* other = NULL;
+		if ((c->pObject1) == this->owner)
+		{
+			me = c->pObject1;
+			other = c->pObject2;
+		}
+
+		else
+		{
+			me = c->pObject2;
+			other = c->pObject1;
+		}
+
+		if (other->getType() == GAME_OBJECT_TYPE::BULLET || other->getType() == GAME_OBJECT_TYPE::MISSILE)
+		{
+			delete me;
+			delete other;
+		}
+			
+
+
+	}
 }
