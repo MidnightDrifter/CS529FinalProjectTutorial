@@ -9,7 +9,7 @@ extern CollisionManager& CollisionMgr;
 extern GameObject* player;
 #define MY_PI  3.14159265358979323846f 
 #define MAX_HOMING_ROTATION_SPEED MY_PI/2.f
-#define MISSILE_SPEED 150.f;
+#define MISSILE_SPEED 15000.f;
 #define ALIEN_SPEED MISSILE_SPEED/2.f
 PhysicsManager::PhysicsManager()
 {
@@ -49,7 +49,7 @@ void PhysicsManager::Integrate(float deltaTime)
 		for (int i=0;i<numObjects;i++)// : GameObjMgr.objects)
 		{
 			Body* body1 = (Body*)GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::BODY);// a->getComponent(COMPONENT_TYPE::BODY);
-			//Transform* t1 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
+		//	Transform* t1 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
 			SpriteBasic* s1 = static_cast<SpriteBasic*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::SPRITE));
 			if (NULL != body1  && NULL != s1)
 			{
@@ -61,8 +61,15 @@ void PhysicsManager::Integrate(float deltaTime)
 					if (NULL != body2 && body2 != body1 && NULL != s1 && NULL != s2)
 					{
 						int x1, y1, x2, y2;
-					//	x1 = body1->
-						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, s1->width, s1->height, s2->width, s2->height);
+						x1 = body1->currPosX + (s1->width / 4);
+						y1 = body1->currPosY-(s1->height / 4);
+						x2 = body2->currPosX + (s2->width / 4);
+						y2 = body2->currPosY -(s2->height / 4);
+
+						//CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, s1->width, s1->height, s2->width, s2->height);// t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());//
+						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, x1, y1, body2->shape, x2, y2, s1->width, s1->height, s2->width, s2->height);// t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());//
+
+					
 					}
 				}
 
@@ -131,6 +138,20 @@ void PhysicsManager::Integrate(float deltaTime)
 				{
 					Transform* targetTransform = static_cast<Transform*>(h->target->getComponent(COMPONENT_TYPE::TRANSFORM));
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
+
+					Body* targetBody = static_cast<Body*>(h->target->getComponent(COMPONENT_TYPE::BODY));
+
+					Vector2D directionToTarget;
+					Vector2DSet(&directionToTarget, targetBody->currPosX - pBody->currPosX, targetBody->currPosY - pBody->currPosY);
+					Vector2DNormalize(&directionToTarget, &directionToTarget);
+
+
+
+
+
+					
+					
+					/*
 					Vector2D myVel, normal, targetVec, out;
 					Vector2DSet(&myVel, pBody->velX, pBody->velY);
 					Vector2DSet(&normal, myVel.y * -1, myVel.x);
@@ -156,6 +177,7 @@ void PhysicsManager::Integrate(float deltaTime)
 					float curAngle = t->getRotation();
 					Vector2DSet(&out, pBody->velX, pBody->velY);
 					Vector2DNormalize(&out, &out);
+					*/
 					float scale = 1.f;
 					if (g->getType() == GAME_OBJECT_TYPE::MISSILE)
 					{
@@ -165,16 +187,17 @@ void PhysicsManager::Integrate(float deltaTime)
 					else if (g->getType() == GAME_OBJECT_TYPE::ALIEN)
 					{
 						scale = MISSILE_SPEED;
-						scale /= 4000.f;
-						scale = 0;
+						scale /= 2;
+						//scale /= 4000.f;
+						//scale = 0;
 
 					}
 
-					Vector2DScale(&out, &out, scale);
+					Vector2DScale(&directionToTarget, &directionToTarget, scale);
 
-					pBody->velX = out.x;
-					pBody->velY = out.y;
-
+					pBody->velX = directionToTarget.x;
+					pBody->velY = directionToTarget.y;
+					
 				}
 				pBody = NULL;
 				h = NULL;

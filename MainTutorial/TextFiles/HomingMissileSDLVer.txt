@@ -1,7 +1,7 @@
 Transform
 100.0 100.0 2.0 1.0 0.0
 Sprite
-Missile.bmp 15 7
+Missile.bmp 44 17
 Body
 5.0
 AABB

@@ -1,7 +1,7 @@
 Transform
 100.0 600.0 1.0 1.0 0
 Sprite
-Asteroid.bmp 75 75
+Asteroid.bmp 138 94
 Body
 30.0
 AABB

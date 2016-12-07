@@ -1,7 +1,7 @@
 Transform
 100.0 100.0 1.0 1.0 0.0
 Sprite
-Bullet.bmp 5 5
+Bullet.bmp 2 2
 Body
 1.0
 AABB

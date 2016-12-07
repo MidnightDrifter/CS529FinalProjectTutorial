@@ -1,6 +1,7 @@
 #include "Body.h"
 #include "PhysicsManager.h"
-
+#include "GameObjectManager.h"
+extern GameObjectManager& GameObjMgr;
 
 
 Body::Body():  Component(COMPONENT_TYPE::BODY), currPosX(0.f), currPosY(0.f), prevPosX(0.f), prevPosY(0.f), velX(0.f), velY(0.f), accelX(0.f), accelY(0.f), mass(0.f), inverseMass(0.f)
@@ -138,8 +139,16 @@ void Body::handleEvent(Event* e)
 
 		if (other->getType() == GAME_OBJECT_TYPE::BULLET || other->getType() == GAME_OBJECT_TYPE::MISSILE)
 		{
-			delete me;
-			delete other;
+			int size = GameObjMgr.objects.size();
+			for (int i = 0; i < size; i++)
+			{
+				if (GameObjMgr.objects[i] == me || GameObjMgr.objects[i] == other)
+				{
+					GameObjMgr.objects.erase(GameObjMgr.objects.begin() + i);
+					size = GameObjMgr.objects.size();
+				}
+			}
+			//delete other;
 		}
 			
 

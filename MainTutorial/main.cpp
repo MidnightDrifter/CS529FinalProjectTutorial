@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
 						destRect.w = s->width;
 						destRect.h = s->height;
 						destRect.x = t->getX() - (destRect.w / 2);
-						destRect.y = t->getY() - (destRect.h / 2);
+						destRect.y = t->getY() -(destRect.h / 2);
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
