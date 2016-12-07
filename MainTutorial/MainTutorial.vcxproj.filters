@@ -410,6 +410,9 @@
     <ClInclude Include="AI.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="SquareMover.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SDL\lib\win32\SDL2.dll">
@@ -495,6 +498,9 @@
     <ClCompile Include="transformMAT4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SquareMover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\dark_pursuit_small_down.bmp">
@@ -552,6 +558,9 @@
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
     <Text Include="TextFiles\Asteroid3SDLVer.txt">
+      <Filter>Resource Files\Serialization Text Files</Filter>
+    </Text>
+    <Text Include="TextFiles\SquareMover.txt">
       <Filter>Resource Files\Serialization Text Files</Filter>
     </Text>
   </ItemGroup>

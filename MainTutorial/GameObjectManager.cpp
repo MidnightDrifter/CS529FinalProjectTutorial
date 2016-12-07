@@ -82,6 +82,12 @@ void GameObjectManager::LoadLevel(const char* s)
 			
 		}
 
+		else if (0 == strcmp(c, "SquareMover.txt"))
+		{
+			obj->loadObject("TextFiles\\SquareMover.txt");
+			obj->setType(GAME_OBJECT_TYPE::SQUARE_MOVER)
+		}
+
 		else if (0 == strcmp(c, "DONE") && obj != NULL)
 		{
 			objects.push_back(obj);
@@ -198,12 +204,12 @@ GameObject* GameObjectManager::LoadObject(const char *pFilename)
 			h->Serialize(&fp);
 			obj->addComponent(h);
 		}
-		/*  AI Component thing
-		else if (0 == name.compare(""))
+		  //AI Component thing
+		else if (0 == strcmp(name,"SquareMover"))
 		{
-
+			
 		}
-		*/
+		
 	}
 	fclose(fp);
 

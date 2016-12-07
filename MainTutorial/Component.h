@@ -9,7 +9,7 @@ enum class COMPONENT_TYPE
 	SPRITE,
 	HOMING,
 	BODY,
-	AI
+	SQUARE_MOVER
 	
 	
 

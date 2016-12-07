@@ -8,3 +8,5 @@ Asteroid3.txt
 DONE
 Alien.txt
 DONE
+SquareMover.txt
+DONE

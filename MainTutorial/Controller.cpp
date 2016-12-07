@@ -174,7 +174,7 @@ void Controller::handleEvent(Event* e)
 		}
 
 
-		if (NULL != b && otherCollider != NULL && (otherCollider->getType() == GAME_OBJECT_TYPE::ALIEN || otherCollider->getType() == GAME_OBJECT_TYPE::ASTEROID))
+		if (NULL != b && otherCollider != NULL && (otherCollider->getType() == GAME_OBJECT_TYPE::ALIEN || otherCollider->getType() == GAME_OBJECT_TYPE::ASTEROID || otherCollider->getType() == GAME_OBJECT_TYPE::SQUARE_MOVER))
 		{
 			//If something with a controller component collides with something, reset its position
 		//	b->currPosX = 0;
