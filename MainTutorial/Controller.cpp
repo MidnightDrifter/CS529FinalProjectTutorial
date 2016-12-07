@@ -12,7 +12,7 @@ extern ResourceManager& ResourceMgr;
 extern EventManager& EventMgr;
 extern GameObject* player;
 #define MY_PI  3.14159265358979323846f 
-const float rad = 180.f / MY_PI;
+const float rad = MY_PI/180.f;
 Controller::Controller() : Component(COMPONENT_TYPE::CONTROLLER)
 {
 	
@@ -26,25 +26,39 @@ Controller::~Controller()
 void Controller::Update()
 {
 	float SHIP_ACCELERATION = 3000000.f;
-	float SHIP_ROTATION_SPEED = 1.f ;
+	float SHIP_ROTATION_SPEED = 320.f * rad ;
 	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
 
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
 	{
-		t->rotation += SHIP_ROTATION_SPEED;
+		t->rotation -= SHIP_ROTATION_SPEED;
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
 	{
-		t->rotation -= SHIP_ROTATION_SPEED;
+		t->rotation = SHIP_ROTATION_SPEED;
+	}
+
+	t->rotation = (int)(t->rotation);
+	if (t->rotation < 0)
+	{
+		t->rotation += 360;
+	}
+
+	else
+	{
+		while (t->rotation >= 360)
+		{
+			t->rotation -= 360;
+		}
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()*rad));
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()*rad));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()));
+		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))

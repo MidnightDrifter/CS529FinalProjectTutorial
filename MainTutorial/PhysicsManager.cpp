@@ -61,10 +61,10 @@ void PhysicsManager::Integrate(float deltaTime)
 					if (NULL != body2 && body2 != body1 && NULL != s1 && NULL != s2)
 					{
 						int x1, y1, x2, y2;
-						x1 = body1->currPosX + (s1->width / 4);
-						y1 = body1->currPosY-(s1->height / 4);
-						x2 = body2->currPosX + (s2->width / 4);
-						y2 = body2->currPosY -(s2->height / 4);
+						x1 = body1->currPosX;// -(s1->width / 2);
+						y1 = body1->currPosY;// -(s1->height / 2);
+						x2 = body2->currPosX;// -(s2->width / 2);
+						y2 = body2->currPosY;// -(s2->height / 2);
 
 						//CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, s1->width, s1->height, s2->width, s2->height);// t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());//
 						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, x1, y1, body2->shape, x2, y2, s1->width, s1->height, s2->width, s2->height);// t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());//

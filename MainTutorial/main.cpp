@@ -46,12 +46,13 @@ SDL_Surface* surface;
 SDL_Surface* winSurface;
 SDL_GLContext context;
 InputManager& InputMgr = InputManager();
-FramerateController& framerateController = FramerateController(5);
+FramerateController& framerateController = FramerateController(60);
 ResourceManager& ResourceMgr = ResourceManager();
 GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
 CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
+SDL_Surface* instructions;
 
 
 
@@ -176,11 +177,11 @@ int main(int argc, char* argv[])
 	}
 
 
-	ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
-	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
-	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
-	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
-
+//	ResourceMgr.loadSurface("Resources\\darkpursuit.bmp");
+//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_down.bmp");
+//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_left.bmp");
+//	ResourceMgr.loadSurface("Resources\\dark_pursuit_small_right.bmp");
+	instructions = ResourceMgr.loadSurface("Resources\\Instructions.bmp");
 	//SDL_Surface* ppImage[4] = { NULL, NULL, NULL, NULL };
 
 	//ppImage[0] = SDL_LoadBMP("..\\Resources\\darkpursuit.bmp");
@@ -361,8 +362,11 @@ int main(int argc, char* argv[])
 				// 512 x 365
 			//	destRect.w = 512;
 			//	destRect.h = 365;
-
-
+				destRect.w = instructions->w;
+				destRect.h = instructions->h;
+				destRect.x = 400;
+				destRect.y = 550;
+				SDL_BlitSurface(instructions, NULL, winSurface, &destRect);
 				for (GameObject* g : GameObjMgr.objects)
 				{
 					SpriteBasic* s = (SpriteBasic*)g->getComponent(COMPONENT_TYPE::SPRITE);
@@ -376,8 +380,19 @@ int main(int argc, char* argv[])
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
+						if (g->getType() == GAME_OBJECT_TYPE::PLAYER)
+						{
+							float angle = t->getRotation();
+							SDL_Surface* player;
 
-						SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
+							if (angle >= 0 && angle < 15)
+							{
+								
+							}
+						}
+						else {
+							SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
+						}
 					}
 					
 				}

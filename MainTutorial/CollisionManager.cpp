@@ -103,6 +103,12 @@ bool CheckCollisionAABBAABB(Shape* AABB1, float posX1, float posY1, Shape* AABB2
 	//If collision, create contact
 	if (1==StaticRectToStaticRect(&rect1, shapeScale1X*(r1->right - r1->left), shapeScale1Y*(r1->top - r1->bot),&rect2, shapeScale2X*(r2->right - r2->left), shapeScale2Y*(r2->top - r2->bot) )) //Collision check goes here 
 	{
+
+		if ((AABB1->bodyOwner->owner->getType() == GAME_OBJECT_TYPE::ASTEROID && AABB2->bodyOwner->owner->getType() == GAME_OBJECT_TYPE::BULLET) || (AABB1->bodyOwner->owner->getType() == GAME_OBJECT_TYPE::BULLET && AABB2->bodyOwner->owner->getType() == GAME_OBJECT_TYPE::ASTEROID))
+		{
+			int i;
+			i = 1;
+		}
 		Contact*pc = new Contact();
 	pc->bodiesColliding[0] = AABB1->bodyOwner;
 	pc->bodiesColliding[1] = AABB2->bodyOwner;
@@ -128,6 +134,7 @@ bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* A
 
 	if (1==StaticCircleToStaticRectangle(&circ1, ci->radius, &rect1, shapeScale2X*(r->left - r->right), shapeScale2Y*(r->top - r->bot))) //Collision check goes here
 	{
+
 		Contact*pc = new Contact();
 		pc->bodiesColliding[0] = circle1->bodyOwner;
 		pc->bodiesColliding[1] = AABB2->bodyOwner;
@@ -168,7 +175,7 @@ bool CheckCollisionAABBCircle(Shape* AABB1, float posX1, float posY1, Shape* cir
 
 bool CollisionManager::CheckCollisionGenerateContacts(Shape* shape1, float posX1, float posY1, Shape* shape2, float posX2, float posY2, float shapeScale1X, float shapeScale1Y, float shapeScale2X, float shapeScale2Y)
 {
-	return CollisionTable[(int)shape1->shapeType][(int)shape2->shapeType](shape1, posX1, posY1, shape2, posX2, posY1, contacts, shapeScale1X, shapeScale1Y, shapeScale2X, shapeScale2Y);
+	return CollisionTable[(int)shape1->shapeType][(int)shape2->shapeType](shape1, posX1, posY1, shape2, posX2, posY2, contacts, shapeScale1X, shapeScale1Y, shapeScale2X, shapeScale2Y);
 }
 
 

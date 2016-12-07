@@ -146,6 +146,7 @@ void Body::handleEvent(Event* e)
 				{
 					GameObjMgr.objects.erase(GameObjMgr.objects.begin() + i);
 					size = GameObjMgr.objects.size();
+					i = 0;
 				}
 			}
 			//delete other;
