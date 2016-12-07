@@ -52,6 +52,9 @@ GameObjectManager& GameObjMgr = GameObjectManager();
 PhysicsManager& PhysicsMgr = PhysicsManager();
 CollisionManager& CollisionMgr = CollisionManager();
 EventManager& EventMgr = EventManager();
+
+
+
 //See :  lazyfoo.net for SDL2 stuff, learnopengl.com for OpenGL stuff, headerphile.com/sdl/ for combining the two
 
 //Actually just go with headerphile, combining stuff is just baaaaaad

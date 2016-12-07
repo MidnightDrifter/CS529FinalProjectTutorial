@@ -21,9 +21,11 @@ void SpriteBasic::Serialize(FILE** fpp)
 {
 	std::string name("Resources\\");
 	char file[100];
-	fscanf(*fpp, "%s %i %i\n",&file, &width, &height);
+	float i, j;
+	fscanf(*fpp, "%s %i %i\n",&file, &i, &j);
 	name += file;
 	spriteName = name;
-	ResourceMgr.loadSurface(name);
-
+	width = ResourceMgr.loadSurface(name)->w;
+	height = ResourceMgr.loadSurface(name)->h;
+	
 }

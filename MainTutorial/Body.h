@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
+#include <set>
 class Body :
 	public Component
 {

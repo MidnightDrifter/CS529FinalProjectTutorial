@@ -49,19 +49,20 @@ void PhysicsManager::Integrate(float deltaTime)
 		for (int i=0;i<numObjects;i++)// : GameObjMgr.objects)
 		{
 			Body* body1 = (Body*)GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::BODY);// a->getComponent(COMPONENT_TYPE::BODY);
-			Transform* t1 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
-			if (NULL != body1  && NULL != t1)
+			//Transform* t1 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
+			SpriteBasic* s1 = static_cast<SpriteBasic*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::SPRITE));
+			if (NULL != body1  && NULL != s1)
 			{
 				for (int j = i + 1; j < numObjects; j++)
 				{
 					Body* body2 = (Body*)GameObjMgr.objects.at(j)->getComponent(COMPONENT_TYPE::BODY);
-					Transform* t2 = static_cast<Transform*>(GameObjMgr.objects.at(i)->getComponent(COMPONENT_TYPE::TRANSFORM));
-				
-					if (NULL != body2 && body2 != body1 && NULL != t1 && NULL != t2)
+					//Transform* t2 = static_cast<Transform*>(GameObjMgr.objects.at(j)->getComponent(COMPONENT_TYPE::TRANSFORM));
+					SpriteBasic* s2 = static_cast<SpriteBasic*>(GameObjMgr.objects.at(j)->getComponent(COMPONENT_TYPE::SPRITE));
+					if (NULL != body2 && body2 != body1 && NULL != s1 && NULL != s2)
 					{
 						int x1, y1, x2, y2;
 					//	x1 = body1->
-						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, t1->getXScale(), t1->getYScale(), t2->getXScale(), t2->getYScale());
+						CollisionMgr.CheckCollisionGenerateContacts(body1->shape, body1->currPosX, body1->currPosY, body2->shape, body2->currPosX, body2->currPosY, s1->width, s1->height, s2->width, s2->height);
 					}
 				}
 

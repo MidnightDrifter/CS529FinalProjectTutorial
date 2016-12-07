@@ -24,6 +24,7 @@ void EventManager::BroadcastEvent(Event* e)
 {
 	for (GameObject* g : GameObjMgr.objects)
 	{
+
 		g->HandleEvent(e);
 	}
 }
