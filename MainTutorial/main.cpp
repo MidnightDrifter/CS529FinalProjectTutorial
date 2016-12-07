@@ -380,19 +380,9 @@ int main(int argc, char* argv[])
 					//	destRect.x = 100.f;
 					//	destRect.y = 100.f;
 
-						if (g->getType() == GAME_OBJECT_TYPE::PLAYER)
-						{
-							float angle = t->getRotation();
-							SDL_Surface* player;
-
-							if (angle >= 0 && angle < 15)
-							{
-								
-							}
-						}
-						else {
+					
 							SDL_BlitSurface(s->getSprite(), NULL, winSurface, &destRect);
-						}
+					
 					}
 					
 				}

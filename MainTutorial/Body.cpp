@@ -25,6 +25,13 @@ void Body::Integrate(float deltaTime, float gravity)
 
 	if (owner)
 	{
+		if (owner->getType() == GAME_OBJECT_TYPE::SQUARE_MOVER)
+		{
+			int x;
+			x = 2;
+		}
+
+
 		Transform* t = (Transform*)owner->getComponent(COMPONENT_TYPE::TRANSFORM);
 		if (t)
 		{

@@ -137,8 +137,8 @@ void Controller::Update()
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
 
 
-		float BULLET_SPEED = 300555.f;
-		float bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
+		
+		 bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
 		//t->setRotation(bulletRot);
 
 		b->velX = -BULLET_SPEED * cosf(bulletRot*rad);
@@ -156,14 +156,14 @@ void Controller::Update()
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
 
 
-		float BULLET_SPEED = 300555.f;
-		float bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
+		
+		 bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
 		//t->setRotation(bulletRot);
 
 		b->velX = BULLET_SPEED * cosf(bulletRot*rad);
 		b->velY = -BULLET_SPEED * sinf(bulletRot*rad);
 
-		 		GameObject* bullet = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::BULLET);
+		 		 bullet = GameObjMgr.spawnObject(GAME_OBJECT_TYPE::BULLET);
 		 b = static_cast<Body*>(bullet->getComponent(COMPONENT_TYPE::BODY));
 		 t = static_cast<Transform*>(bullet->getComponent(COMPONENT_TYPE::TRANSFORM));
 		
@@ -175,8 +175,8 @@ void Controller::Update()
 		t->setY(static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)))->getY());
 
 
-		float BULLET_SPEED = 300555.f;
-		float bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
+		
+		 bulletRot = (static_cast<Transform*>(this->owner->getComponent(COMPONENT_TYPE::TRANSFORM))->getRotation());
 		//t->setRotation(bulletRot);
 
 		b->velX = -BULLET_SPEED * cosf(bulletRot*rad);

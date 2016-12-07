@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "Controller.h"
 #include "Homing.h"
+#include "SquareMover.h"
 #include <vector>
 class GameObjectManager
 {

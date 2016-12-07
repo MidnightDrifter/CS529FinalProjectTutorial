@@ -6,9 +6,6 @@ extern FramerateController& framerateController;
 
 
 
-SquareMover::~SquareMover()
-{
-}
 
 void SquareMover::Serialize(FILE** fpp)
 {
@@ -21,36 +18,42 @@ void SquareMover::Update()
 	
 	counter += framerateController.getFrameTime();
 
-	if (counter >= timer)
+	if (counter < timer)
 	{
 		Body* b = static_cast<Body*>(owner->getComponent(COMPONENT_TYPE::BODY));
 		if (fourHolder == 0)
 		{
 			b->velX = speed;
 			b->velY = 0;
-			fourHolder++;
+			//fourHolder++;
 		}
 
 		else if (fourHolder == 1)
 		{
 			fourHolder++;
 			b->velX = 0;
-			b->velY = speed;
+		//	b->velY = speed;
 		}
 
 		else if (fourHolder == 2)
 		{
-			fourHolder++;
+		//	fourHolder++;
 			b->velX = -speed;
 			b->velY = 0;
 		}
 
 		else if (fourHolder == 3)
 		{
-			fourHolder = 0;
+		//	fourHolder = 0;
 			b->velX = 0;
 			b->velY = -speed;
 		}
+		//counter = 0;
+	}
+
+	else
+	{
+		fourHolder = (fourHolder + 1) % 4;
 		counter = 0;
 	}
 
