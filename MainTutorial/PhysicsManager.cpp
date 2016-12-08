@@ -81,14 +81,43 @@ void PhysicsManager::Integrate(float deltaTime)
 			CollisionEvent c;
 			c.pObject1 = a->bodiesColliding[0]->owner;
 			c.pObject2 = a->bodiesColliding[1]->owner;
-			if (a->bodiesColliding[0] != NULL)
+			if (c.pObject1 != NULL)
 			{
-				a->bodiesColliding[0]->owner->HandleEvent(&c);
+				c.pObject1->HandleEvent(&c);
 			}
-			if (a->bodiesColliding[1] != NULL)
+			if (c.pObject2 != NULL)
 			{
-				a->bodiesColliding[1]->owner->HandleEvent(&c);
+				c.pObject2->HandleEvent(&c);
 
+			}
+
+			if (c.pObject1 != NULL && c.pObject2 != NULL)
+			{
+				GameObject* p = NULL;
+				GameObject* al = NULL;
+				if (c.pObject1->getType() == GAME_OBJECT_TYPE::PLAYER)
+				{
+					p = c.pObject1;
+				}
+
+				 if (c.pObject2->getType() == GAME_OBJECT_TYPE::PLAYER)
+				{
+					p = c.pObject2;
+				}
+
+				 if (c.pObject1->getType() == GAME_OBJECT_TYPE::ALIEN || c.pObject1->getType() == GAME_OBJECT_TYPE::ASTEROID || c.pObject1->getType() == GAME_OBJECT_TYPE::SQUARE_MOVER)
+				 {
+					 al = c.pObject1;
+				}
+				 if (c.pObject2->getType() == GAME_OBJECT_TYPE::ALIEN || c.pObject2->getType() == GAME_OBJECT_TYPE::ASTEROID || c.pObject2->getType() == GAME_OBJECT_TYPE::SQUARE_MOVER)
+				 {
+					 al = c.pObject2;
+				 }
+
+				 if (p != NULL && a != NULL)
+				 {
+					 break;
+				 }
 			}
 		}
 

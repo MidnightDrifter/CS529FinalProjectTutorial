@@ -132,7 +132,7 @@ bool CheckCollisionCircleAABB(Shape* circle1, float posX1, float posY1, Shape* A
 		Vector2DSet(&rect1, posX2, posY2);
 	//If collision, create contact
 
-	if (1==StaticCircleToStaticRectangle(&circ1, ci->radius, &rect1, shapeScale2X*(r->left - r->right), shapeScale2Y*(r->top - r->bot))) //Collision check goes here
+	if (1==StaticCircleToStaticRectangle(&circ1, shapeScale1X*ci->radius, &rect1, shapeScale2X*(r->left - r->right), shapeScale2Y*(r->top - r->bot))) //Collision check goes here
 	{
 
 		Contact*pc = new Contact();

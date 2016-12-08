@@ -11,6 +11,7 @@ extern GameObjectManager& GameObjMgr;
 extern ResourceManager& ResourceMgr;
 extern EventManager& EventMgr;
 extern GameObject* player;
+extern CollisionManager& CollisionMgr;
 #define MY_PI  3.14159265358979323846f 
 const float rad = MY_PI/180.f;
 Controller::Controller() : Component(COMPONENT_TYPE::CONTROLLER)
@@ -25,23 +26,16 @@ Controller::~Controller()
 
 void Controller::Update()
 {
-	float SHIP_ACCELERATION = 3000000.f;
-	float SHIP_ROTATION_SPEED = 320.f * rad ;
-	//if left key Triggered
 	Transform* t = static_cast<Transform*>((this->owner->getComponent(COMPONENT_TYPE::TRANSFORM)));
+	//float SHIP_ACCELERATION = 3000000.f;
+	float SHIP_SPEED = 300000.f;
+	float SHIP_ROTATION_SPEED = 75.f;// *rad;
+	//if left key Triggered
+	Body* b = static_cast<Body*>(owner->getComponent(COMPONENT_TYPE::BODY));
+
+	/*
 
 
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
-	{
-		t->rotation -= SHIP_ROTATION_SPEED;
-	}
-
-	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
-	{
-		t->rotation = SHIP_ROTATION_SPEED;
-	}
-
-	t->rotation = (int)(t->rotation);
 	if (t->rotation < 0)
 	{
 		t->rotation += 360;
@@ -55,16 +49,40 @@ void Controller::Update()
 		}
 	}
 
+	*/
+	if (InputMgr.isKeyPressed(SDL_SCANCODE_LEFT))
+	{
+		t->rotation -= SHIP_ROTATION_SPEED;
+		b->velX = -SHIP_SPEED;
+
+	}
+
+	if (InputMgr.isKeyPressed(SDL_SCANCODE_RIGHT))
+	{
+		t->rotation += SHIP_ROTATION_SPEED;
+		b->velX = SHIP_SPEED;
+	}
+
+	int f = t->rotation;
+
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_DOWN))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(t->getRotation()));
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(t->getRotation()));
+//		f %= f;
+
+		//static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX -= (SHIP_ACCELERATION * cosf(f*rad));
+		//static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY -= (SHIP_ACCELERATION * sinf(f*rad));
+
+		b->velY = SHIP_SPEED;
 	}
 
 	if (InputMgr.isKeyPressed(SDL_SCANCODE_UP))
 	{
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(t->getRotation() *rad));
-		static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(t->getRotation()*rad));
+	//	f %= f;
+
+		//static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelX += (SHIP_ACCELERATION * cosf(f *rad));
+		//static_cast<Body*>((this->owner->getComponent(COMPONENT_TYPE::BODY)))->accelY += (SHIP_ACCELERATION * sinf(f*rad));
+	
+		b->velY = -SHIP_SPEED;
 	}
 	
 
@@ -245,7 +263,9 @@ void Controller::handleEvent(Event* e)
 		//	b->currPosY = 0.5f; 
 
 			//Don't need player hit event, collision works just fine
+			CollisionMgr.Reset();
 			GameObjMgr.objects.clear();
+		
 			GameObjMgr.LoadLevel("TextFiles//Level.txt");
 			for (int i = 0; i < GameObjMgr.objects.size(); i++)
 			{
@@ -255,6 +275,8 @@ void Controller::handleEvent(Event* e)
 					i = GameObjMgr.objects.size();
 				}
 			}
+
+			
 		
 		}
 		/*

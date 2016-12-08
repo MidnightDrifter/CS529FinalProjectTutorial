@@ -16,7 +16,7 @@ void SquareMover::Serialize(FILE** fpp)
 void SquareMover::Update()
 {
 	
-	counter += framerateController.getFrameTime();
+	counter += framerateController.getFrameTime() / 1000.f;
 
 	if (counter < timer)
 	{
@@ -30,9 +30,9 @@ void SquareMover::Update()
 
 		else if (fourHolder == 1)
 		{
-			fourHolder++;
+		//	fourHolder++;
 			b->velX = 0;
-		//	b->velY = speed;
+			b->velY = speed;
 		}
 
 		else if (fourHolder == 2)
