@@ -134,7 +134,7 @@ void PhysicsManager::Integrate(float deltaTime)
 					}
 				}
 
-				if (h != NULL)
+				if (h != NULL && h->target !=NULL)
 				{
 					Transform* targetTransform = static_cast<Transform*>(h->target->getComponent(COMPONENT_TYPE::TRANSFORM));
 					Transform* t = (Transform*)g->getComponent(COMPONENT_TYPE::TRANSFORM);
