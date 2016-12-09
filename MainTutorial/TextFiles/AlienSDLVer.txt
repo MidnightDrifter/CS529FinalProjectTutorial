@@ -1,9 +1,9 @@
 Transform
-26.0 26.0 1.0 1.0 0.0
+35.0 26.0 1.0 1.0 0.0
 Sprite
 Alien.bmp 82 80
 Body
 15.0
 Circle
-0.5
+2.0
 Homing

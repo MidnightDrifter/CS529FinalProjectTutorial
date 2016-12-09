@@ -2,7 +2,7 @@
 #include "PhysicsManager.h"
 #include "GameObjectManager.h"
 extern GameObjectManager& GameObjMgr;
-
+extern CollisionManager& CollisionMgr;
 
 Body::Body():  Component(COMPONENT_TYPE::BODY), currPosX(0.f), currPosY(0.f), prevPosX(0.f), prevPosY(0.f), velX(0.f), velY(0.f), accelX(0.f), accelY(0.f), mass(0.f), inverseMass(0.f)
 {
@@ -154,6 +154,8 @@ void Body::handleEvent(Event* e)
 					GameObjMgr.objects.erase(GameObjMgr.objects.begin() + i);
 					size = GameObjMgr.objects.size();
 					i = 0;
+				
+
 				}
 			}
 			//delete other;

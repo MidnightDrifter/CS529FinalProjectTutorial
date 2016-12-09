@@ -23,7 +23,7 @@ public:
 	virtual ~Shape() {}
 
 	virtual bool TestPoint(float x, float y) = 0;
-
+	
 
 
 
